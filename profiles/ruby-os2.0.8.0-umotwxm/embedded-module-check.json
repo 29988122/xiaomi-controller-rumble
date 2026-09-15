@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "embedded_crcs_verified": 61,
+  "cfi": true,
+  "vermagic": "4.19.191-gdecc267868f3 SMP preempt mod_unload modversions aarch64"
+}

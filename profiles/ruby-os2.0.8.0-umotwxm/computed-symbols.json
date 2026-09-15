@@ -1,0 +1,2498 @@
+{
+  "power_supply_class": {
+    "crc": "0x354b1805",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_notifier": {
+    "crc": "0xedd092d5",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_changed": {
+    "crc": "0xf405c7f3",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_am_i_supplied": {
+    "crc": "0x9e5e8600",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_is_system_supplied": {
+    "crc": "0x2c208607",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_set_input_current_limit_from_supplier": {
+    "crc": "0xdb8d702a",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_set_battery_charged": {
+    "crc": "0x4e6824ea",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_get_by_name": {
+    "crc": "0x82715326",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_put": {
+    "crc": "0xe5652777",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_get_by_phandle": {
+    "crc": "0xcaefcea4",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "devm_power_supply_get_by_phandle": {
+    "crc": "0x2f4c5bde",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_get_battery_info": {
+    "crc": "0xa07ea1f5",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_get_property": {
+    "crc": "0x0dbbba38",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_set_property": {
+    "crc": "0xa276a6ff",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_property_is_writeable": {
+    "crc": "0x5cdef50c",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_external_power_changed": {
+    "crc": "0x6c1e93bb",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_powers": {
+    "crc": "0x5cfe9ca7",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_reg_notifier": {
+    "crc": "0x136209db",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_unreg_notifier": {
+    "crc": "0x6b81c38b",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_register": {
+    "crc": "0x7e690ddc",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_register_no_ws": {
+    "crc": "0x471ac060",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "devm_power_supply_register": {
+    "crc": "0xf0588502",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "devm_power_supply_register_no_ws": {
+    "crc": "0x4d84ef22",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_unregister": {
+    "crc": "0x77f5d228",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "power_supply_get_drvdata": {
+    "crc": "0xaf625b30",
+    "source": "drivers/power/supply/power_supply_core.o.symversions"
+  },
+  "led_classdev_suspend": {
+    "crc": "0xb1bc901d",
+    "source": "drivers/leds/led-class.o.symversions"
+  },
+  "led_classdev_resume": {
+    "crc": "0xc7c07f50",
+    "source": "drivers/leds/led-class.o.symversions"
+  },
+  "of_led_classdev_register": {
+    "crc": "0x37707169",
+    "source": "drivers/leds/led-class.o.symversions"
+  },
+  "led_classdev_unregister": {
+    "crc": "0x809ea2c6",
+    "source": "drivers/leds/led-class.o.symversions"
+  },
+  "devm_of_led_classdev_register": {
+    "crc": "0x111a5da9",
+    "source": "drivers/leds/led-class.o.symversions"
+  },
+  "devm_led_classdev_unregister": {
+    "crc": "0xb4c48403",
+    "source": "drivers/leds/led-class.o.symversions"
+  },
+  "input_ff_create_memless": {
+    "crc": "0xca43ee42",
+    "source": "drivers/input/ff-memless.o.symversions"
+  },
+  "input_event": {
+    "crc": "0xcb1b2a99",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_inject_event": {
+    "crc": "0x5a3588d8",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_alloc_absinfo": {
+    "crc": "0x6ecd9213",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_set_abs_params": {
+    "crc": "0xc37a8567",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_grab_device": {
+    "crc": "0x800bee2c",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_release_device": {
+    "crc": "0x8a073a1e",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_open_device": {
+    "crc": "0xd0a9a55e",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_flush_device": {
+    "crc": "0xaf6f383a",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_close_device": {
+    "crc": "0xac541831",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_scancode_to_scalar": {
+    "crc": "0x2c256e1f",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_get_keycode": {
+    "crc": "0xda8ae39b",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_set_keycode": {
+    "crc": "0xf546ac8e",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_match_device_id": {
+    "crc": "0x5fff3595",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_reset_device": {
+    "crc": "0xbee164b2",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_class": {
+    "crc": "0x1444bea9",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_allocate_device": {
+    "crc": "0xa368d29e",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "devm_input_allocate_device": {
+    "crc": "0x50e5d032",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_free_device": {
+    "crc": "0x8363f4ac",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_set_timestamp": {
+    "crc": "0x686cfd81",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_get_timestamp": {
+    "crc": "0xbce314b2",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_set_capability": {
+    "crc": "0xcb577aa3",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_enable_softrepeat": {
+    "crc": "0x924b35d6",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_register_device": {
+    "crc": "0x82121f44",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_unregister_device": {
+    "crc": "0x9cdaf9c5",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_register_handler": {
+    "crc": "0xf283a43b",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_unregister_handler": {
+    "crc": "0xc6ecdbda",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_handler_for_each_handle": {
+    "crc": "0xcef434e3",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_register_handle": {
+    "crc": "0xe867774d",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_unregister_handle": {
+    "crc": "0x950b180c",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_get_new_minor": {
+    "crc": "0xccc21f5e",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_free_minor": {
+    "crc": "0x5cf53ce2",
+    "source": "drivers/input/input.o.symversions"
+  },
+  "input_mt_init_slots": {
+    "crc": "0x4d0c74b0",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_destroy_slots": {
+    "crc": "0xab5f76e8",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_report_slot_state": {
+    "crc": "0x22159dde",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_report_finger_count": {
+    "crc": "0xfcecda0f",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_report_pointer_emulation": {
+    "crc": "0x3d7b947d",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_drop_unused": {
+    "crc": "0x6eb7ee6d",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_sync_frame": {
+    "crc": "0x3b104630",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_assign_slots": {
+    "crc": "0x37f0717a",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "input_mt_get_slot_by_key": {
+    "crc": "0x20f5097d",
+    "source": "drivers/input/input-mt.o.symversions"
+  },
+  "device_link_add": {
+    "crc": "0x10053f8d",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_link_del": {
+    "crc": "0x2f4deae1",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_link_remove": {
+    "crc": "0xc4f30a2e",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "dev_driver_string": {
+    "crc": "0x7a9cb878",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_store_ulong": {
+    "crc": "0x99a30a09",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_show_ulong": {
+    "crc": "0x4b30f215",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_store_int": {
+    "crc": "0x881e9a6b",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_show_int": {
+    "crc": "0x02c4a8ce",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_store_bool": {
+    "crc": "0xad9705e7",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_show_bool": {
+    "crc": "0xdd36ce1a",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_add_groups": {
+    "crc": "0x448a532e",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_remove_groups": {
+    "crc": "0x0a88428b",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "devm_device_add_group": {
+    "crc": "0x849ceeb8",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "devm_device_remove_group": {
+    "crc": "0xcda5636d",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "devm_device_add_groups": {
+    "crc": "0x44cdd87d",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "devm_device_remove_groups": {
+    "crc": "0x1ea741e1",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_create_file": {
+    "crc": "0x66a9aa8c",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_remove_file": {
+    "crc": "0x781bb29e",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_remove_file_self": {
+    "crc": "0x9266754e",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_create_bin_file": {
+    "crc": "0x9ba3b3e8",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_remove_bin_file": {
+    "crc": "0xa2ee46aa",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_initialize": {
+    "crc": "0xd21a1a9b",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "dev_set_name": {
+    "crc": "0x1b550dc6",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_add": {
+    "crc": "0xdea263ff",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_register": {
+    "crc": "0x4b9bb2f9",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "get_device": {
+    "crc": "0x7f7186d1",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "put_device": {
+    "crc": "0x6c30f0be",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "kill_device": {
+    "crc": "0xe5219109",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_del": {
+    "crc": "0x72febfd4",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_unregister": {
+    "crc": "0x88cae004",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_for_each_child": {
+    "crc": "0xd9485735",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_for_each_child_reverse": {
+    "crc": "0xe5191c62",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_find_child": {
+    "crc": "0x15469518",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_online": {
+    "crc": "0x0beefdf8",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "__root_device_register": {
+    "crc": "0x7110058c",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "root_device_unregister": {
+    "crc": "0x0a8f4242",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_create_vargs": {
+    "crc": "0xefcc9da1",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_create": {
+    "crc": "0xf062e5dd",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_create_with_groups": {
+    "crc": "0x56151ba4",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_destroy": {
+    "crc": "0x00c30cbf",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_rename": {
+    "crc": "0x533eefab",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_move": {
+    "crc": "0x0529d62e",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "dev_vprintk_emit": {
+    "crc": "0x1c2d4f1a",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "dev_printk_emit": {
+    "crc": "0xa599263d",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "dev_printk": {
+    "crc": "0x3111dffc",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "_dev_emerg": {
+    "crc": "0x0b361b2e",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "_dev_alert": {
+    "crc": "0xd1ce03a6",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "_dev_crit": {
+    "crc": "0xbc9e125c",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "_dev_err": {
+    "crc": "0x1b9d5801",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "_dev_warn": {
+    "crc": "0x39b61007",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "_dev_notice": {
+    "crc": "0x6956ed2b",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "_dev_info": {
+    "crc": "0x8634b838",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "set_primary_fwnode": {
+    "crc": "0x259b4a5f",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "device_set_of_node_from_dev": {
+    "crc": "0x9bd8a894",
+    "source": "drivers/base/core.o.symversions"
+  },
+  "devres_alloc_node": {
+    "crc": "0x01c9cba4",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_for_each_res": {
+    "crc": "0xc8bbf77d",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_free": {
+    "crc": "0xe93e49c3",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_add": {
+    "crc": "0x6d71dc6c",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_find": {
+    "crc": "0x9c1d2700",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_get": {
+    "crc": "0xcf59b8ef",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_remove": {
+    "crc": "0xbf76c33b",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_destroy": {
+    "crc": "0x00b00022",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_release": {
+    "crc": "0xf6b753e3",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_open_group": {
+    "crc": "0xf340bb7a",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_close_group": {
+    "crc": "0xc3996d6a",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_remove_group": {
+    "crc": "0xb92ceed6",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devres_release_group": {
+    "crc": "0x44e9a22d",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_add_action": {
+    "crc": "0xa0470ac9",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_remove_action": {
+    "crc": "0x7006df07",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_kmalloc": {
+    "crc": "0x7ca54300",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_kstrdup": {
+    "crc": "0x4007ea2d",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_kvasprintf": {
+    "crc": "0x493830cb",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_kasprintf": {
+    "crc": "0x5ae59dc2",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_kfree": {
+    "crc": "0x8a0f556c",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_kmemdup": {
+    "crc": "0x156ee760",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_get_free_pages": {
+    "crc": "0x1ddb612c",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_free_pages": {
+    "crc": "0x6ae9051a",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "__devm_alloc_percpu": {
+    "crc": "0x8be0242c",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "devm_free_percpu": {
+    "crc": "0xb488236d",
+    "source": "drivers/base/devres.o.symversions"
+  },
+  "hid_debug": {
+    "crc": "0x05495392",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_register_report": {
+    "crc": "0x1c863fd7",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_parse_report": {
+    "crc": "0x35abda56",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_validate_values": {
+    "crc": "0xe9c65845",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_open_report": {
+    "crc": "0x68271b4f",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_snto32": {
+    "crc": "0x8b13a8b8",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_field_extract": {
+    "crc": "0x06c934a0",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_output_report": {
+    "crc": "0xa0389b72",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_alloc_report_buf": {
+    "crc": "0xe36e7488",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_set_field": {
+    "crc": "0x5e934e04",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "__hid_request": {
+    "crc": "0x1bf8d477",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_report_raw_event": {
+    "crc": "0xd45f8ae9",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_input_report": {
+    "crc": "0xeef32e23",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_connect": {
+    "crc": "0x3bcee200",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_disconnect": {
+    "crc": "0x1cd41d35",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_hw_start": {
+    "crc": "0xf5c2eec3",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_hw_stop": {
+    "crc": "0x360c2aba",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_hw_open": {
+    "crc": "0x1b31ede7",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_hw_close": {
+    "crc": "0x28375077",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_match_device": {
+    "crc": "0x4d9f1b3e",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_compare_device_paths": {
+    "crc": "0xb9fd48fb",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_bus_type": {
+    "crc": "0x4dc2e7c7",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_add_device": {
+    "crc": "0x246b93ac",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_allocate_device": {
+    "crc": "0xb265ad42",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_destroy_device": {
+    "crc": "0x33190992",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "__hid_register_driver": {
+    "crc": "0x2300cd60",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_unregister_driver": {
+    "crc": "0xaf54076e",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "hid_check_keys_pressed": {
+    "crc": "0x29d7b077",
+    "source": "drivers/hid/hid-core.o.symversions"
+  },
+  "__ll_sc_atomic_add": {
+    "crc": "0x1f7386be",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_add_return": {
+    "crc": "0x7c97c8a4",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_add_return_relaxed": {
+    "crc": "0xdb911cc4",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_add_return_acquire": {
+    "crc": "0x7dbe0931",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_add_return_release": {
+    "crc": "0xbc5d46b1",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_add": {
+    "crc": "0x35772342",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_add_relaxed": {
+    "crc": "0xdc2ee375",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_add_acquire": {
+    "crc": "0x7a01f680",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_add_release": {
+    "crc": "0xbbe2b900",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_sub": {
+    "crc": "0xf9a3efb9",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_sub_return": {
+    "crc": "0xec2ac905",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_sub_return_relaxed": {
+    "crc": "0x6c53d7d9",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_sub_return_acquire": {
+    "crc": "0xca7cc22c",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_sub_return_release": {
+    "crc": "0x0b9f8dac",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_sub": {
+    "crc": "0xd3a74a45",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_sub_relaxed": {
+    "crc": "0x7d6fcd0a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_sub_acquire": {
+    "crc": "0xdb40d8ff",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_sub_release": {
+    "crc": "0x1aa3977f",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_and": {
+    "crc": "0xeb70b156",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_and": {
+    "crc": "0xc17414aa",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_and_relaxed": {
+    "crc": "0xdaffc24e",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_and_acquire": {
+    "crc": "0x7cd0d7bb",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_and_release": {
+    "crc": "0xbd33983b",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_andnot": {
+    "crc": "0x367068c4",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_andnot": {
+    "crc": "0x5eb36eef",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_andnot_relaxed": {
+    "crc": "0xac211f6f",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_andnot_acquire": {
+    "crc": "0x0a0e0a9a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_andnot_release": {
+    "crc": "0xcbed451a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_or": {
+    "crc": "0x3a728925",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_or": {
+    "crc": "0x51fce1de",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_or_relaxed": {
+    "crc": "0xe746f9ff",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_or_acquire": {
+    "crc": "0x4169ec0a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_or_release": {
+    "crc": "0x808aa38a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_xor": {
+    "crc": "0xbabea58f",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_xor": {
+    "crc": "0x90ba0073",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_xor_relaxed": {
+    "crc": "0x7ead8e1b",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_xor_acquire": {
+    "crc": "0xd8829bee",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic_fetch_xor_release": {
+    "crc": "0x1961d46e",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_add": {
+    "crc": "0xa899153f",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_add_return": {
+    "crc": "0x9e9183dc",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_add_return_relaxed": {
+    "crc": "0x3490a717",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_add_return_acquire": {
+    "crc": "0xb26c1ea9",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_add_return_release": {
+    "crc": "0xbdc33066",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_add": {
+    "crc": "0xe13a9d16",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_add_relaxed": {
+    "crc": "0xe04e8d48",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_add_acquire": {
+    "crc": "0x66b234f6",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_add_release": {
+    "crc": "0x691d1a39",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_sub": {
+    "crc": "0xba195f7b",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_sub_return": {
+    "crc": "0xcbe0d43a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_sub_return_relaxed": {
+    "crc": "0xa7d0c217",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_sub_return_acquire": {
+    "crc": "0x212c7ba9",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_sub_return_release": {
+    "crc": "0x2e835566",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_sub": {
+    "crc": "0xf3bad752",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_sub_relaxed": {
+    "crc": "0xa972bb52",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_sub_acquire": {
+    "crc": "0x2f8e02ec",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_sub_release": {
+    "crc": "0x20212c23",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_and": {
+    "crc": "0x0b8bea3b",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_and": {
+    "crc": "0x42286212",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_and_relaxed": {
+    "crc": "0x8fab8f54",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_and_acquire": {
+    "crc": "0x095736ea",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_and_release": {
+    "crc": "0x06f81825",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_andnot": {
+    "crc": "0x08aa9477",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_andnot": {
+    "crc": "0x83b30940",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_andnot_relaxed": {
+    "crc": "0xb2cd441b",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_andnot_acquire": {
+    "crc": "0x3431fda5",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_andnot_release": {
+    "crc": "0x3b9ed36a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_or": {
+    "crc": "0xad1c144b",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_or": {
+    "crc": "0x67d370ad",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_or_relaxed": {
+    "crc": "0x06488f16",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_or_acquire": {
+    "crc": "0x80b436a8",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_or_release": {
+    "crc": "0x8f1b1867",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_xor": {
+    "crc": "0x02ed8c26",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_xor": {
+    "crc": "0x4b4e040f",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_xor_relaxed": {
+    "crc": "0x53ce5c47",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_xor_acquire": {
+    "crc": "0xd532e5f9",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_fetch_xor_release": {
+    "crc": "0xda9dcb36",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc_atomic64_dec_if_positive": {
+    "crc": "0x4c5ed81a",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_1": {
+    "crc": "0xf1c082b6",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_2": {
+    "crc": "0xf32e786c",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_4": {
+    "crc": "0xf6f38dd8",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_8": {
+    "crc": "0xfd4866b0",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_acq_1": {
+    "crc": "0x04aaab42",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_acq_2": {
+    "crc": "0x06445198",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_acq_4": {
+    "crc": "0x0399a42c",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_acq_8": {
+    "crc": "0x08224f44",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_rel_1": {
+    "crc": "0x7a02431b",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_rel_2": {
+    "crc": "0x78ecb9c1",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_rel_4": {
+    "crc": "0x7d314c75",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_rel_8": {
+    "crc": "0x768aa71d",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_mb_1": {
+    "crc": "0xdce20752",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_mb_2": {
+    "crc": "0xde0cfd88",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_mb_4": {
+    "crc": "0xdbd1083c",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_case_mb_8": {
+    "crc": "0xd06ae354",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_double": {
+    "crc": "0x1632bcc0",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__ll_sc___cmpxchg_double_mb": {
+    "crc": "0x3897a479",
+    "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+  },
+  "__stack_chk_guard": {
+    "crc": "0x8f678b07",
+    "source": "arch/arm64/kernel/process.o.symversions"
+  },
+  "pm_power_off": {
+    "crc": "0x60a32ea9",
+    "source": "arch/arm64/kernel/process.o.symversions"
+  },
+  "arm_pm_restart": {
+    "crc": "0xeaa3702b",
+    "source": "arch/arm64/kernel/process.o.symversions"
+  },
+  "copy_page": {
+    "crc": "0x4d0d163d",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "clear_page": {
+    "crc": "0x3d9ee9f0",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__arch_copy_from_user": {
+    "crc": "0xaf507de1",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__arch_copy_to_user": {
+    "crc": "0x6b2941b2",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__arch_clear_user": {
+    "crc": "0x55686530",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__arch_copy_in_user": {
+    "crc": "0xc9957204",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "memstart_addr": {
+    "crc": "0x9688de8b",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "strchr": {
+    "crc": "0x349cba85",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "strrchr": {
+    "crc": "0x9f984513",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "strcmp": {
+    "crc": "0xe2d5255a",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "strncmp": {
+    "crc": "0x5a921311",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "strlen": {
+    "crc": "0x98cf60b3",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "strnlen": {
+    "crc": "0xa916b694",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "memcmp": {
+    "crc": "0x449ad0a7",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "memchr": {
+    "crc": "0xa07a37f0",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "memset": {
+    "crc": "0xdcb764ad",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "memcpy": {
+    "crc": "0x4829a47e",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "memmove": {
+    "crc": "0x5a9f1d63",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__memset": {
+    "crc": "0xd3559ef4",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__memcpy": {
+    "crc": "0x9d1a5e3a",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__memmove": {
+    "crc": "0x2bfbab10",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "set_bit": {
+    "crc": "0xa33484d2",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "test_and_set_bit": {
+    "crc": "0xbde4d77e",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "clear_bit": {
+    "crc": "0x93f3ec8b",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "test_and_clear_bit": {
+    "crc": "0x632301f0",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "change_bit": {
+    "crc": "0xb0040391",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "test_and_change_bit": {
+    "crc": "0x77237bc8",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__arm_smccc_smc": {
+    "crc": "0xf93aae46",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__arm_smccc_hvc": {
+    "crc": "0x50f85302",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__ashlti3": {
+    "crc": "0xd7ff1b8a",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__ashrti3": {
+    "crc": "0xc838c3f5",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__lshrti3": {
+    "crc": "0xc2f52274",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__dma_inv_area": {
+    "crc": "0xf74a4ea3",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__dma_clean_area": {
+    "crc": "0x13face90",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__dma_flush_area": {
+    "crc": "0xd778d941",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__flush_dcache_area": {
+    "crc": "0x6dbf1fe7",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__bss_stop": {
+    "crc": "0xbd42c458",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__per_cpu_start": {
+    "crc": "0xe06c705c",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "__per_cpu_end": {
+    "crc": "0x5f1aaf9e",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "_sdata": {
+    "crc": "0x434c2a89",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "cpu_do_idle": {
+    "crc": "0x7c4fc81a",
+    "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+  },
+  "simple_strtoull": {
+    "crc": "0x61b7b126",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "simple_strtoul": {
+    "crc": "0x20000329",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "simple_strtol": {
+    "crc": "0x0b742fd7",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "simple_strtoll": {
+    "crc": "0xd7e56a4e",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "ptr_to_hashval": {
+    "crc": "0x993bc332",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "vsnprintf": {
+    "crc": "0x8ab2e3d5",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "vscnprintf": {
+    "crc": "0xae5db1fb",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "snprintf": {
+    "crc": "0x28318305",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "scnprintf": {
+    "crc": "0x4ca9669f",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "vsprintf": {
+    "crc": "0x0ef8a5bf",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "sprintf": {
+    "crc": "0x91715312",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "vbin_printf": {
+    "crc": "0x2484e789",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "bstr_printf": {
+    "crc": "0x108a0acd",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "bprintf": {
+    "crc": "0xf955e9c5",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "vsscanf": {
+    "crc": "0x4302fb69",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "sscanf": {
+    "crc": "0x20c55ae0",
+    "source": "lib/vsprintf.o.symversions"
+  },
+  "__dynamic_pr_debug": {
+    "crc": "0x44b1d426",
+    "source": "lib/dynamic_debug.o.symversions"
+  },
+  "__dynamic_dev_dbg": {
+    "crc": "0xfe3ad189",
+    "source": "lib/dynamic_debug.o.symversions"
+  },
+  "__dynamic_netdev_dbg": {
+    "crc": "0xbd056360",
+    "source": "lib/dynamic_debug.o.symversions"
+  },
+  "ddebug_add_module": {
+    "crc": "0xcb469d2b",
+    "source": "lib/dynamic_debug.o.symversions"
+  },
+  "ddebug_remove_module": {
+    "crc": "0xe6c68334",
+    "source": "lib/dynamic_debug.o.symversions"
+  },
+  "crc32_le": {
+    "crc": "0xe78bfacd",
+    "source": "lib/crc32.o.symversions"
+  },
+  "__crc32c_le": {
+    "crc": "0x1367deca",
+    "source": "lib/crc32.o.symversions"
+  },
+  "crc32_le_shift": {
+    "crc": "0x4aea463f",
+    "source": "lib/crc32.o.symversions"
+  },
+  "__crc32c_le_shift": {
+    "crc": "0x7d5e1008",
+    "source": "lib/crc32.o.symversions"
+  },
+  "crc32_be": {
+    "crc": "0xc3a6e1c1",
+    "source": "lib/crc32.o.symversions"
+  },
+  "strncasecmp": {
+    "crc": "0x96b29254",
+    "source": "lib/string.o.symversions"
+  },
+  "strcasecmp": {
+    "crc": "0xaafdc258",
+    "source": "lib/string.o.symversions"
+  },
+  "strcpy": {
+    "crc": "0xe914e41e",
+    "source": "lib/string.o.symversions"
+  },
+  "strncpy": {
+    "crc": "0x9166fada",
+    "source": "lib/string.o.symversions"
+  },
+  "strlcpy": {
+    "crc": "0x5792f848",
+    "source": "lib/string.o.symversions"
+  },
+  "strscpy": {
+    "crc": "0xdd64e639",
+    "source": "lib/string.o.symversions"
+  },
+  "stpcpy": {
+    "crc": "0xf4db35bc",
+    "source": "lib/string.o.symversions"
+  },
+  "strscpy_pad": {
+    "crc": "0xfbb8a761",
+    "source": "lib/string.o.symversions"
+  },
+  "strcat": {
+    "crc": "0x061651be",
+    "source": "lib/string.o.symversions"
+  },
+  "strncat": {
+    "crc": "0x2e2b40d2",
+    "source": "lib/string.o.symversions"
+  },
+  "strlcat": {
+    "crc": "0xf9c0b663",
+    "source": "lib/string.o.symversions"
+  },
+  "strchrnul": {
+    "crc": "0xceab0311",
+    "source": "lib/string.o.symversions"
+  },
+  "strnchr": {
+    "crc": "0x4841bdee",
+    "source": "lib/string.o.symversions"
+  },
+  "skip_spaces": {
+    "crc": "0xd0a91bab",
+    "source": "lib/string.o.symversions"
+  },
+  "strim": {
+    "crc": "0x77bc13a0",
+    "source": "lib/string.o.symversions"
+  },
+  "strspn": {
+    "crc": "0xc29bf967",
+    "source": "lib/string.o.symversions"
+  },
+  "strcspn": {
+    "crc": "0x1ac5d3cb",
+    "source": "lib/string.o.symversions"
+  },
+  "strpbrk": {
+    "crc": "0x9a1dfd65",
+    "source": "lib/string.o.symversions"
+  },
+  "strsep": {
+    "crc": "0x85df9b6c",
+    "source": "lib/string.o.symversions"
+  },
+  "sysfs_streq": {
+    "crc": "0x222e7ce2",
+    "source": "lib/string.o.symversions"
+  },
+  "match_string": {
+    "crc": "0x81188c30",
+    "source": "lib/string.o.symversions"
+  },
+  "__sysfs_match_string": {
+    "crc": "0x169938c1",
+    "source": "lib/string.o.symversions"
+  },
+  "memzero_explicit": {
+    "crc": "0xc15a44c6",
+    "source": "lib/string.o.symversions"
+  },
+  "memset16": {
+    "crc": "0x654449c3",
+    "source": "lib/string.o.symversions"
+  },
+  "memset32": {
+    "crc": "0x489eda10",
+    "source": "lib/string.o.symversions"
+  },
+  "memset64": {
+    "crc": "0xed8a2d95",
+    "source": "lib/string.o.symversions"
+  },
+  "bcmp": {
+    "crc": "0x263c3152",
+    "source": "lib/string.o.symversions"
+  },
+  "memscan": {
+    "crc": "0xf812cff6",
+    "source": "lib/string.o.symversions"
+  },
+  "strstr": {
+    "crc": "0x1e6d26a8",
+    "source": "lib/string.o.symversions"
+  },
+  "strnstr": {
+    "crc": "0xc310b981",
+    "source": "lib/string.o.symversions"
+  },
+  "memchr_inv": {
+    "crc": "0x8df92f66",
+    "source": "lib/string.o.symversions"
+  },
+  "strreplace": {
+    "crc": "0x7410aba2",
+    "source": "lib/string.o.symversions"
+  },
+  "fortify_panic": {
+    "crc": "0xcbd4898c",
+    "source": "lib/string.o.symversions"
+  },
+  "idr_alloc_u32": {
+    "crc": "0x3ae189a4",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_alloc": {
+    "crc": "0x7d79ea60",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_alloc_cyclic": {
+    "crc": "0xf90a18eb",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_remove": {
+    "crc": "0xfe6e59fa",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_find": {
+    "crc": "0x9ad03057",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_for_each": {
+    "crc": "0x672fff92",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_get_next_ul": {
+    "crc": "0x983d6965",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_get_next": {
+    "crc": "0x9df03b9d",
+    "source": "lib/idr.o.symversions"
+  },
+  "idr_replace": {
+    "crc": "0xa89857fa",
+    "source": "lib/idr.o.symversions"
+  },
+  "ida_destroy": {
+    "crc": "0xe013f905",
+    "source": "lib/idr.o.symversions"
+  },
+  "ida_alloc_range": {
+    "crc": "0xa14ab2f3",
+    "source": "lib/idr.o.symversions"
+  },
+  "ida_free": {
+    "crc": "0xadf4146a",
+    "source": "lib/idr.o.symversions"
+  },
+  "kstrtoull": {
+    "crc": "0x3c80c06c",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtoll": {
+    "crc": "0x779a18af",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "_kstrtoul": {
+    "crc": "0x54a9db5f",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "_kstrtol": {
+    "crc": "0x04ea56f9",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtouint": {
+    "crc": "0x69ad2f20",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtoint": {
+    "crc": "0x2276db98",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtou16": {
+    "crc": "0x7b0192da",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtos16": {
+    "crc": "0x69493b1a",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtou8": {
+    "crc": "0x46045dd7",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtos8": {
+    "crc": "0xbcbdf60f",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtobool": {
+    "crc": "0xe0875eb1",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtobool_from_user": {
+    "crc": "0xda9fc7ae",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtoull_from_user": {
+    "crc": "0x54245b39",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtoll_from_user": {
+    "crc": "0x2cf73cb7",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtoul_from_user": {
+    "crc": "0x8a6af65c",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtol_from_user": {
+    "crc": "0x461ac773",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtouint_from_user": {
+    "crc": "0xfcb926cd",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtoint_from_user": {
+    "crc": "0x23c9891c",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtou16_from_user": {
+    "crc": "0xe13d5d07",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtos16_from_user": {
+    "crc": "0xeff608e0",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtou8_from_user": {
+    "crc": "0xc1179daa",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "kstrtos8_from_user": {
+    "crc": "0xb417f082",
+    "source": "lib/kstrtox.o.symversions"
+  },
+  "__list_add_valid": {
+    "crc": "0x68f31cbd",
+    "source": "lib/list_debug.o.symversions"
+  },
+  "__list_del_entry_valid": {
+    "crc": "0xe1537255",
+    "source": "lib/list_debug.o.symversions"
+  },
+  "___ratelimit": {
+    "crc": "0x1d24c881",
+    "source": "lib/ratelimit.o.symversions"
+  },
+  "param_set_byte": {
+    "crc": "0x6dd3cbe3",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_byte": {
+    "crc": "0x872678d2",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_byte": {
+    "crc": "0x8ede8ca5",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_short": {
+    "crc": "0x5e4de502",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_short": {
+    "crc": "0xd22576a8",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_short": {
+    "crc": "0x9af2d499",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_ushort": {
+    "crc": "0xd0531a17",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_ushort": {
+    "crc": "0xe19ffb4c",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_ushort": {
+    "crc": "0xa0ed66a3",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_int": {
+    "crc": "0xe75d1eb7",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_int": {
+    "crc": "0xf57a9990",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_int": {
+    "crc": "0xa7d7ab70",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_uint": {
+    "crc": "0xfd53fb57",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_uint": {
+    "crc": "0x03affde6",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_uint": {
+    "crc": "0x4e6f951e",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_long": {
+    "crc": "0x080bf77b",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_long": {
+    "crc": "0x6b9ab72a",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_long": {
+    "crc": "0x671b7ea3",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_ulong": {
+    "crc": "0xa81b1be6",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_ulong": {
+    "crc": "0xd20ab647",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_ulong": {
+    "crc": "0xcdf88ac2",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_ullong": {
+    "crc": "0x817e188e",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_ullong": {
+    "crc": "0xe534f45e",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_ullong": {
+    "crc": "0xd33e6bab",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_charp": {
+    "crc": "0x96a01bce",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_charp": {
+    "crc": "0x1369ac1d",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_free_charp": {
+    "crc": "0x27479d14",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_charp": {
+    "crc": "0x1d976435",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_bool": {
+    "crc": "0x4a16f4c0",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_bool": {
+    "crc": "0x1319cc31",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_bool": {
+    "crc": "0x3a1d733e",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_bool_enable_only": {
+    "crc": "0xeecca7c7",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_bool_enable_only": {
+    "crc": "0x0cf24263",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_invbool": {
+    "crc": "0x14be00d0",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_invbool": {
+    "crc": "0x7be4b045",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_invbool": {
+    "crc": "0xa48e6d9b",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_bint": {
+    "crc": "0x0b8e4427",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_bint": {
+    "crc": "0x9cafde8c",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_array_ops": {
+    "crc": "0x60641764",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_set_copystring": {
+    "crc": "0x41375ae2",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_get_string": {
+    "crc": "0x308f913a",
+    "source": "kernel/params.o.symversions"
+  },
+  "param_ops_string": {
+    "crc": "0xa5d0a858",
+    "source": "kernel/params.o.symversions"
+  },
+  "kernel_param_lock": {
+    "crc": "0xe1eef6b2",
+    "source": "kernel/params.o.symversions"
+  },
+  "kernel_param_unlock": {
+    "crc": "0x294f4d99",
+    "source": "kernel/params.o.symversions"
+  },
+  "module_kset": {
+    "crc": "0xea492756",
+    "source": "kernel/params.o.symversions"
+  },
+  "module_ktype": {
+    "crc": "0xc807bfcf",
+    "source": "kernel/params.o.symversions"
+  },
+  "panic_timeout": {
+    "crc": "0x1f8544b8",
+    "source": "kernel/panic.o.symversions"
+  },
+  "panic_notifier_list": {
+    "crc": "0x07ceeac9",
+    "source": "kernel/panic.o.symversions"
+  },
+  "vendor_panic_cb": {
+    "crc": "0xd3d8ce96",
+    "source": "kernel/panic.o.symversions"
+  },
+  "panic_blink": {
+    "crc": "0x63eb9355",
+    "source": "kernel/panic.o.symversions"
+  },
+  "nmi_panic": {
+    "crc": "0x77d57961",
+    "source": "kernel/panic.o.symversions"
+  },
+  "panic": {
+    "crc": "0x7c1372e8",
+    "source": "kernel/panic.o.symversions"
+  },
+  "test_taint": {
+    "crc": "0x651a4139",
+    "source": "kernel/panic.o.symversions"
+  },
+  "add_taint": {
+    "crc": "0x76d451c4",
+    "source": "kernel/panic.o.symversions"
+  },
+  "__warn_printk": {
+    "crc": "0xad27f361",
+    "source": "kernel/panic.o.symversions"
+  },
+  "__stack_chk_fail": {
+    "crc": "0xf0fdf6cb",
+    "source": "kernel/panic.o.symversions"
+  },
+  "system_wq": {
+    "crc": "0x2d3385d3",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "system_highpri_wq": {
+    "crc": "0xcd91b127",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "system_long_wq": {
+    "crc": "0x131db64a",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "system_unbound_wq": {
+    "crc": "0xd4c14632",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "system_freezable_wq": {
+    "crc": "0xd4034828",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "system_power_efficient_wq": {
+    "crc": "0x47884890",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "system_freezable_power_efficient_wq": {
+    "crc": "0xd067d3c5",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "queue_work_on": {
+    "crc": "0x04be4d8b",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "delayed_work_timer_fn": {
+    "crc": "0x253af43d",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "queue_delayed_work_on": {
+    "crc": "0xaeca7f89",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "mod_delayed_work_on": {
+    "crc": "0xffba80e6",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "queue_rcu_work": {
+    "crc": "0xf01b5286",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "flush_workqueue": {
+    "crc": "0x42160169",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "drain_workqueue": {
+    "crc": "0xa38602cd",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "flush_work": {
+    "crc": "0xa7ab6d28",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "cancel_work_sync": {
+    "crc": "0x72394689",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "flush_delayed_work": {
+    "crc": "0x45ffb39d",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "flush_rcu_work": {
+    "crc": "0xf6f31f86",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "cancel_delayed_work": {
+    "crc": "0x672bf342",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "cancel_delayed_work_sync": {
+    "crc": "0xec306b1c",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "execute_in_process_context": {
+    "crc": "0x7d4dbd22",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "apply_workqueue_attrs": {
+    "crc": "0xd5e8eb7b",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "__alloc_workqueue_key": {
+    "crc": "0x43a53735",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "destroy_workqueue": {
+    "crc": "0x8c03d20c",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "workqueue_set_max_active": {
+    "crc": "0xf31b3fd1",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "current_work": {
+    "crc": "0xa13a3158",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "workqueue_congested": {
+    "crc": "0xa26d9b4f",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "work_busy": {
+    "crc": "0x2395379b",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "set_worker_desc": {
+    "crc": "0x7049c830",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "work_on_cpu": {
+    "crc": "0xf82f3657",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "work_on_cpu_safe": {
+    "crc": "0x0d459213",
+    "source": "kernel/workqueue.o.symversions"
+  },
+  "cfi_module_add": {
+    "crc": "0xea9cbb7f",
+    "source": "kernel/cfi.o.symversions"
+  },
+  "cfi_module_remove": {
+    "crc": "0x8e16764b",
+    "source": "kernel/cfi.o.symversions"
+  },
+  "__cfi_slowpath": {
+    "crc": "0x2cd90edd",
+    "source": "kernel/cfi.o.symversions"
+  },
+  "__ubsan_handle_cfi_check_fail_abort": {
+    "crc": "0xdf7a4c69",
+    "source": "kernel/cfi.o.symversions"
+  },
+  "module_mutex": {
+    "crc": "0xe719502a",
+    "source": "kernel/module.o.symversions"
+  },
+  "is_module_sig_enforced": {
+    "crc": "0xd6fde043",
+    "source": "kernel/module.o.symversions"
+  },
+  "register_module_notifier": {
+    "crc": "0xf353a698",
+    "source": "kernel/module.o.symversions"
+  },
+  "unregister_module_notifier": {
+    "crc": "0x6a5ecb18",
+    "source": "kernel/module.o.symversions"
+  },
+  "__module_put_and_exit": {
+    "crc": "0x27cf5b2f",
+    "source": "kernel/module.o.symversions"
+  },
+  "find_module": {
+    "crc": "0x6e38eebd",
+    "source": "kernel/module.o.symversions"
+  },
+  "__tracepoint_module_get": {
+    "crc": "0x10f8772b",
+    "source": "kernel/module.o.symversions"
+  },
+  "module_refcount": {
+    "crc": "0x3a91df1d",
+    "source": "kernel/module.o.symversions"
+  },
+  "__symbol_put": {
+    "crc": "0x6e9dd606",
+    "source": "kernel/module.o.symversions"
+  },
+  "symbol_put_addr": {
+    "crc": "0x66d87d38",
+    "source": "kernel/module.o.symversions"
+  },
+  "__module_get": {
+    "crc": "0xa876b4b0",
+    "source": "kernel/module.o.symversions"
+  },
+  "try_module_get": {
+    "crc": "0x3e66164d",
+    "source": "kernel/module.o.symversions"
+  },
+  "module_put": {
+    "crc": "0xdcd4284e",
+    "source": "kernel/module.o.symversions"
+  },
+  "__symbol_get": {
+    "crc": "0x868784cb",
+    "source": "kernel/module.o.symversions"
+  },
+  "save_modules": {
+    "crc": "0x35ec6560",
+    "source": "kernel/module.o.symversions"
+  },
+  "module_layout": {
+    "crc": "0xf0c01ec5",
+    "source": "kernel/module.o.symversions"
+  },
+  "ignore_console_lock_warning": {
+    "crc": "0x98e508ef",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "oops_in_progress": {
+    "crc": "0xb1c3a01a",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_drivers": {
+    "crc": "0x0a92c75f",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_set_on_cmdline": {
+    "crc": "0x2459bbcc",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "log_buf_addr_get": {
+    "crc": "0x81b939ec",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "log_buf_len_get": {
+    "crc": "0xc98fa91b",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "vprintk_emit": {
+    "crc": "0x926d0909",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "vprintk": {
+    "crc": "0x933eff89",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "printk_emit": {
+    "crc": "0xdd8ccfcd",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "vprintk_default": {
+    "crc": "0x983f8879",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "printk": {
+    "crc": "0x7c32d0f0",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_suspend_enabled": {
+    "crc": "0x0366307a",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_lock": {
+    "crc": "0xfbaaf01e",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_trylock": {
+    "crc": "0x40d04664",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "is_console_locked": {
+    "crc": "0x944a564d",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_unlock": {
+    "crc": "0xc631580a",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_conditional_schedule": {
+    "crc": "0xbef43296",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_stop": {
+    "crc": "0x55ca6bd6",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "console_start": {
+    "crc": "0x62b62cb6",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "register_console": {
+    "crc": "0x96e192e7",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "unregister_console": {
+    "crc": "0xcb824edb",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "__printk_ratelimit": {
+    "crc": "0x6128b5fc",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "printk_timed_ratelimit": {
+    "crc": "0x07cc4a5d",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "kmsg_dump_register": {
+    "crc": "0x9b4f6661",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "kmsg_dump_unregister": {
+    "crc": "0xed814ec1",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "kmsg_dump_get_line": {
+    "crc": "0x2e78702e",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "kmsg_dump_get_buffer": {
+    "crc": "0x374c2088",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "kmsg_dump_rewind": {
+    "crc": "0xf6449ec8",
+    "source": "kernel/printk/printk.o.symversions"
+  },
+  "_raw_spin_trylock": {
+    "crc": "0x8c3253ec",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_trylock_bh": {
+    "crc": "0x963dcba1",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_lock": {
+    "crc": "0xdbf17652",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_lock_irqsave": {
+    "crc": "0x51760917",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_lock_irq": {
+    "crc": "0x47941711",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_lock_bh": {
+    "crc": "0xb3635b01",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_unlock": {
+    "crc": "0x301fa007",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_unlock_irqrestore": {
+    "crc": "0x3812050a",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_unlock_irq": {
+    "crc": "0xc5664491",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_spin_unlock_bh": {
+    "crc": "0x49c41a57",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_trylock": {
+    "crc": "0x359ec42f",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_lock": {
+    "crc": "0x32ae5741",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_lock_irqsave": {
+    "crc": "0x736b5662",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_lock_irq": {
+    "crc": "0xf8595510",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_lock_bh": {
+    "crc": "0x150e3657",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_unlock": {
+    "crc": "0xef2993f4",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_unlock_irqrestore": {
+    "crc": "0xa16c8613",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_unlock_irq": {
+    "crc": "0xc8f375c1",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_read_unlock_bh": {
+    "crc": "0x0ad10eb8",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_trylock": {
+    "crc": "0xdee365b0",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_lock": {
+    "crc": "0x5a245f6d",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_lock_irqsave": {
+    "crc": "0xe25ee9d3",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_lock_irq": {
+    "crc": "0x9eab8d85",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_lock_bh": {
+    "crc": "0xe1ed698d",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_unlock": {
+    "crc": "0xd8c318e2",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_unlock_irqrestore": {
+    "crc": "0x1c1b9f8e",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_unlock_irq": {
+    "crc": "0x4ccd378a",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "_raw_write_unlock_bh": {
+    "crc": "0x8ad29bab",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "in_lock_functions": {
+    "crc": "0x09d44df9",
+    "source": "kernel/locking/spinlock.o.symversions"
+  },
+  "kfree_const": {
+    "crc": "0xf474fdcb",
+    "source": "mm/util.o.symversions"
+  },
+  "kstrdup": {
+    "crc": "0xc499ae1e",
+    "source": "mm/util.o.symversions"
+  },
+  "kstrdup_const": {
+    "crc": "0x120fc6b1",
+    "source": "mm/util.o.symversions"
+  },
+  "kstrndup": {
+    "crc": "0xaf6ae696",
+    "source": "mm/util.o.symversions"
+  },
+  "kmemdup": {
+    "crc": "0x448eac3e",
+    "source": "mm/util.o.symversions"
+  },
+  "kmemdup_nul": {
+    "crc": "0xe452b05e",
+    "source": "mm/util.o.symversions"
+  },
+  "memdup_user": {
+    "crc": "0x9291cd3b",
+    "source": "mm/util.o.symversions"
+  },
+  "vmemdup_user": {
+    "crc": "0x90576ec4",
+    "source": "mm/util.o.symversions"
+  },
+  "strndup_user": {
+    "crc": "0x41482d8b",
+    "source": "mm/util.o.symversions"
+  },
+  "memdup_user_nul": {
+    "crc": "0x1d07e365",
+    "source": "mm/util.o.symversions"
+  },
+  "__get_user_pages_fast": {
+    "crc": "0x981cf957",
+    "source": "mm/util.o.symversions"
+  },
+  "get_user_pages_fast": {
+    "crc": "0x2e078c2e",
+    "source": "mm/util.o.symversions"
+  },
+  "vm_mmap": {
+    "crc": "0xce780154",
+    "source": "mm/util.o.symversions"
+  },
+  "kvmalloc_node": {
+    "crc": "0xc5bc25de",
+    "source": "mm/util.o.symversions"
+  },
+  "kvfree": {
+    "crc": "0x7aa1756e",
+    "source": "mm/util.o.symversions"
+  },
+  "kvfree_sensitive": {
+    "crc": "0x7412ed5b",
+    "source": "mm/util.o.symversions"
+  },
+  "page_mapped": {
+    "crc": "0x7ddf3206",
+    "source": "mm/util.o.symversions"
+  },
+  "page_mapping": {
+    "crc": "0xebd3489f",
+    "source": "mm/util.o.symversions"
+  },
+  "__page_mapcount": {
+    "crc": "0x55b7e0fa",
+    "source": "mm/util.o.symversions"
+  },
+  "vm_memory_committed": {
+    "crc": "0x26520970",
+    "source": "mm/util.o.symversions"
+  },
+  "kmem_cache_alloc": {
+    "crc": "0xe60e23f1",
+    "source": "mm/slub.o.symversions"
+  },
+  "kmem_cache_alloc_trace": {
+    "crc": "0xccfe2590",
+    "source": "mm/slub.o.symversions"
+  },
+  "kmem_cache_free": {
+    "crc": "0xa74a31a4",
+    "source": "mm/slub.o.symversions"
+  },
+  "kmem_cache_free_bulk": {
+    "crc": "0x4b01e05b",
+    "source": "mm/slub.o.symversions"
+  },
+  "kmem_cache_alloc_bulk": {
+    "crc": "0xae08b9fe",
+    "source": "mm/slub.o.symversions"
+  },
+  "__kmalloc": {
+    "crc": "0xd2b09ce5",
+    "source": "mm/slub.o.symversions"
+  },
+  "ksize": {
+    "crc": "0x04ea5d10",
+    "source": "mm/slub.o.symversions"
+  },
+  "kfree": {
+    "crc": "0x037a0cba",
+    "source": "mm/slub.o.symversions"
+  },
+  "__kmalloc_track_caller": {
+    "crc": "0x77e07d2f",
+    "source": "mm/slub.o.symversions"
+  },
+  "kmem_cache_size": {
+    "crc": "0xc7e4fee2",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kmem_cache_create_usercopy": {
+    "crc": "0x9d2ebe4b",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kmem_cache_create": {
+    "crc": "0xc45357b0",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kmem_cache_destroy": {
+    "crc": "0x4015ca48",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kmem_cache_shrink": {
+    "crc": "0x3dffa9bb",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kmalloc_caches": {
+    "crc": "0xcbf91bab",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kmalloc_order": {
+    "crc": "0xca832efe",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kmalloc_order_trace": {
+    "crc": "0xa202a8e5",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "__krealloc": {
+    "crc": "0x7b2aef6c",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "krealloc": {
+    "crc": "0x7c2d098f",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "kzfree": {
+    "crc": "0x7a4497db",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "__tracepoint_kmalloc": {
+    "crc": "0xc13a7ba6",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "__tracepoint_kmem_cache_alloc": {
+    "crc": "0xa1839690",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "__tracepoint_kmalloc_node": {
+    "crc": "0xad6f7144",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "__tracepoint_kmem_cache_alloc_node": {
+    "crc": "0x08690bbf",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "__tracepoint_kfree": {
+    "crc": "0xd04c7414",
+    "source": "mm/slab_common.o.symversions"
+  },
+  "__tracepoint_kmem_cache_free": {
+    "crc": "0x4562a134",
+    "source": "mm/slab_common.o.symversions"
+  }
+}

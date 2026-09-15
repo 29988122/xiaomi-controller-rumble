@@ -1,0 +1,12 @@
+build/
+__pycache__/
+*.o
+*.ko
+*.mod.c
+*.cmd
+*.symversions
+Module.symvers
+modules.order
+.tmp_versions/
+
+!profiles/*/sony_g8ff.ko

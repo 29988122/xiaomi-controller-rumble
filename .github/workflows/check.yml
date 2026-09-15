@@ -1,0 +1,18 @@
+name: Check public release
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pyelftools==0.33
+      - run: python -m unittest discover -s tests -v
+      - run: bash -n tools/build.sh tools/prepare.sh
+      - run: for f in module/*.sh module/bin/g8ffctl module/lib/*.sh; do sh -n "$f"; done
+      - run: python tools/verify_module.py profiles/ruby-os2.0.8.0-umotwxm/sony_g8ff.ko profiles/ruby-os2.0.8.0-umotwxm/stock-symbols.json profiles/ruby-os2.0.8.0-umotwxm/computed-symbols.json /tmp/module-check.json --profile profiles/ruby-os2.0.8.0-umotwxm/profile.json
+      - run: python tools/package.py && git diff --exit-code -- dist

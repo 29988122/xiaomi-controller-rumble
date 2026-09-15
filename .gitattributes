@@ -1,0 +1,4 @@
+# Unified patch context prefixes precede the kernel's original tabs.
+*.patch whitespace=-space-before-tab
+# Keep imported upstream source formatting unchanged for build provenance.
+driver/sony_g8ff.c whitespace=-blank-at-eol

@@ -1,0 +1,16 @@
+{
+  "kernel_release": "4.19.191-gdecc267868f3",
+  "fingerprint": "Redmi/ruby_global/ruby:14/UP1A.231005.007/OS2.0.8.0.UMOTWXM:user/release-keys",
+  "module_sha256": "4798bdc9521a0e68f63f5d430ab71122355f891aaf920aec9e01ecdcc4b09035",
+  "poll_interval": 4,
+  "abi_symbols": 61,
+  "id": "ruby-os2.0.8.0-umotwxm",
+  "model": "Redmi Note 12 Pro 5G (ruby)",
+  "localversion": "-gdecc267868f3",
+  "source_commit": "914ba8403bb3a957ed37b99dcecdbafce9d16121",
+  "toolchain": "Android Clang 11 r383902",
+  "vermagic": "4.19.191-gdecc267868f3 SMP preempt mod_unload modversions aarch64",
+  "source_sha256": "43a0d78d4b7b8460495d8cf54f9634264aab4ab8cad205e26341b66783ca54a5",
+  "toolchain_sha256": "afd99fb760191fafe933809308d16295a302ac14b36058abe2f4489f0706e7e5",
+  "ff_test_sha256": "dd927f16c94d6cd49aa59c46cf050ab4365c7742e6151e5386444bf6813f8738"
+}

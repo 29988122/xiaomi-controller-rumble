@@ -1,0 +1,116 @@
+#!/system/bin/sh
+# This script must run as root. It never changes SELinux or module verification.
+set -u
+G8FF_DIR=${0%/bin/g8ffctl}
+. "$G8FF_DIR/config.sh"
+G8FF_LOCK="$G8FF_DIR/run/lock"
+mkdir -p "$G8FF_DIR/run"
+
+log() { printf '%s %s\n' "$(date +%s)" "$*" >> "$G8FF_DIR/run/events.log"; }
+compatible() {
+    [ "$(uname -r)" = "$G8FF_KERNEL" ] &&
+    [ "$(getprop ro.build.fingerprint)" = "$G8FF_FINGERPRINT" ] &&
+    [ "$(sha256sum "$G8FF_DIR/bin/sony_g8ff.ko" | cut -d ' ' -f 1)" = "$G8FF_SHA256" ]
+}
+load_driver() {
+    compatible || { log 'Compatibility check failed; driver not loaded'; return 1; }
+    if [ -d /sys/module/sony_g8ff ]; then
+        [ "$(cat /sys/module/sony_g8ff/parameters/target_uniq)" = "$G8FF_UNIQ" ] || return 1
+    else
+        insmod "$G8FF_DIR/bin/sony_g8ff.ko" "target_uniq=$G8FF_UNIQ" "target_poll_interval=$G8FF_POLL" || return 1
+        log 'Driver loaded'
+    fi
+}
+is_target() {
+    [ -r "$1/uevent" ] &&
+    grep -qx 'HID_ID=0005:0000054C:000005C4' "$1/uevent" 2>/dev/null &&
+    grep -qx "HID_UNIQ=$G8FF_UNIQ" "$1/uevent" 2>/dev/null
+}
+driver_of() { basename "$(readlink "$1/driver")"; }
+bind_once() {
+    for G8FF_DEV in /sys/bus/hid/devices/*; do
+        is_target "$G8FF_DEV" || continue
+        G8FF_CURRENT=$(driver_of "$G8FF_DEV")
+        # HID appears before the original probe finishes creating its attributes.
+        [ -z "$G8FF_CURRENT" ] && continue
+        [ "$G8FF_CURRENT" = sony_g8ff ] && continue
+        [ "$G8FF_CURRENT" = sony ] || { log "Unexpected driver: $G8FF_CURRENT"; return 1; }
+        G8FF_ID=${G8FF_DEV##*/}
+        [ -r "$G8FF_DEV/bt_poll_interval" ] || continue
+        G8FF_OLD_POLL=$(cat "$G8FF_DEV/bt_poll_interval" 2>/dev/null) || continue
+        printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony/unbind || { [ -e "$G8FF_DEV" ] && return 1; continue; }
+        if ! printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony_g8ff/bind; then
+            [ -e "$G8FF_DEV" ] || continue
+            printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony/bind
+            log 'Binding failed; attempted stock-driver restore'
+            return 1
+        fi
+        printf '%s' "$G8FF_OLD_POLL" > "$G8FF_DEV/bt_poll_interval" || { [ -e "$G8FF_DEV" ] && return 1; continue; }
+        log "Bound $G8FF_ID; poll interval preserved"
+    done
+}
+restore() {
+    for G8FF_DEV in /sys/bus/hid/devices/*; do
+        is_target "$G8FF_DEV" || continue
+        [ "$(driver_of "$G8FF_DEV")" = sony_g8ff ] || continue
+        G8FF_ID=${G8FF_DEV##*/}
+        G8FF_OLD_POLL=$(cat "$G8FF_DEV/bt_poll_interval") || { [ -e "$G8FF_DEV" ] && return 1; continue; }
+        printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony_g8ff/unbind || { [ -e "$G8FF_DEV" ] && return 1; continue; }
+        [ -e "$G8FF_DEV" ] || continue
+        printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony/bind || { [ -e "$G8FF_DEV" ] && return 1; continue; }
+        printf '%s' "$G8FF_OLD_POLL" > "$G8FF_DEV/bt_poll_interval" || { [ -e "$G8FF_DEV" ] && return 1; continue; }
+    done
+    if [ -d /sys/module/sony_g8ff ]; then rmmod sony_g8ff || return 1; fi
+    log 'Restored stock driver'
+}
+stop_worker() {
+    if [ -r "$G8FF_LOCK/pid" ]; then
+        G8FF_PID=$(cat "$G8FF_LOCK/pid")
+        case "$G8FF_PID" in ''|*[!0-9]*) return 1;; esac
+        if [ -r "/proc/$G8FF_PID/cmdline" ]; then
+            tr '\000' ' ' < "/proc/$G8FF_PID/cmdline" | grep -Fq "$G8FF_DIR/bin/g8ffctl" || return 1
+            kill "$G8FF_PID" || return 1
+            G8FF_WAIT=0
+            while kill -0 "$G8FF_PID" 2>/dev/null; do
+                G8FF_WAIT=$((G8FF_WAIT + 1)); [ "$G8FF_WAIT" -le 10 ] || return 1
+                sleep 1
+            done
+        fi
+        rm -f "$G8FF_LOCK/pid" "$G8FF_LOCK/boot_id"
+        rmdir "$G8FF_LOCK" 2>/dev/null || true
+    fi
+}
+case "${1:-status}" in
+    once) [ ! -e "$G8FF_DIR/disable" ] && load_driver && bind_once;;
+    watch)
+        [ -e "$G8FF_DIR/disable" ] && exit 0
+        G8FF_BOOT_ID=$(cat /proc/sys/kernel/random/boot_id) || exit 1
+        if [ -d "$G8FF_LOCK" ]; then
+            G8FF_PREVIOUS_BOOT=$(cat "$G8FF_LOCK/boot_id" 2>/dev/null)
+            if [ -n "$G8FF_PREVIOUS_BOOT" ] && [ "$G8FF_PREVIOUS_BOOT" != "$G8FF_BOOT_ID" ]; then
+                rm -f "$G8FF_LOCK/pid" "$G8FF_LOCK/boot_id"
+                rmdir "$G8FF_LOCK" || exit 1
+            fi
+        fi
+        mkdir "$G8FF_LOCK" 2>/dev/null || { log 'Worker lock exists; refusing duplicate'; exit 1; }
+        echo $$ > "$G8FF_LOCK/pid"
+        printf '%s' "$G8FF_BOOT_ID" > "$G8FF_LOCK/boot_id"
+        trap 'rm -f "$G8FF_LOCK/pid" "$G8FF_LOCK/boot_id"; rmdir "$G8FF_LOCK" 2>/dev/null' EXIT
+        trap 'exit 0' INT TERM HUP
+        load_driver || exit 1
+        while [ ! -e "$G8FF_DIR/disable" ]; do
+            bind_once || { log 'Worker stopped after binding error'; exit 1; }
+            sleep 1
+        done
+        restore
+        ;;
+    stop) stop_worker && restore;;
+    status)
+        compatible && echo 'Compatibility: passed' || echo 'Compatibility: failed'
+        [ -d /sys/module/sony_g8ff ] && echo 'Driver: loaded' || echo 'Driver: absent'
+        for G8FF_DEV in /sys/bus/hid/devices/*; do
+            is_target "$G8FF_DEV" && printf '%s %s\n' "${G8FF_DEV##*/}" "$(driver_of "$G8FF_DEV")"
+        done
+        ;;
+    *) echo 'Usage: g8ffctl once|watch|stop|status' >&2; exit 2;;
+esac

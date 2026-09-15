@@ -1,0 +1,738 @@
+{
+  "passed": true,
+  "required_count": 61,
+  "rows": [
+    {
+      "symbol": "___ratelimit",
+      "status": "match",
+      "stock": {
+        "crc": "0x1d24c881",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x1d24c881",
+        "source": "lib/ratelimit.o.symversions"
+      }
+    },
+    {
+      "symbol": "__cfi_slowpath",
+      "status": "match",
+      "stock": {
+        "crc": "0x2cd90edd",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x2cd90edd",
+        "source": "kernel/cfi.o.symversions"
+      }
+    },
+    {
+      "symbol": "__dynamic_dev_dbg",
+      "status": "match",
+      "stock": {
+        "crc": "0xfe3ad189",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xfe3ad189",
+        "source": "lib/dynamic_debug.o.symversions"
+      }
+    },
+    {
+      "symbol": "__hid_register_driver",
+      "status": "match",
+      "stock": {
+        "crc": "0x2300cd60",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x2300cd60",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "__hid_request",
+      "status": "match",
+      "stock": {
+        "crc": "0x1bf8d477",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x1bf8d477",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "__list_add_valid",
+      "status": "match",
+      "stock": {
+        "crc": "0x68f31cbd",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x68f31cbd",
+        "source": "lib/list_debug.o.symversions"
+      }
+    },
+    {
+      "symbol": "__list_del_entry_valid",
+      "status": "match",
+      "stock": {
+        "crc": "0xe1537255",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xe1537255",
+        "source": "lib/list_debug.o.symversions"
+      }
+    },
+    {
+      "symbol": "__ll_sc_atomic64_andnot",
+      "status": "match",
+      "stock": {
+        "crc": "0x08aa9477",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x08aa9477",
+        "source": "arch/arm64/lib/atomic_ll_sc.o.symversions"
+      }
+    },
+    {
+      "symbol": "__stack_chk_fail",
+      "status": "match",
+      "stock": {
+        "crc": "0xf0fdf6cb",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xf0fdf6cb",
+        "source": "kernel/panic.o.symversions"
+      }
+    },
+    {
+      "symbol": "__stack_chk_guard",
+      "status": "match",
+      "stock": {
+        "crc": "0x8f678b07",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x8f678b07",
+        "source": "arch/arm64/kernel/process.o.symversions"
+      }
+    },
+    {
+      "symbol": "_dev_err",
+      "status": "match",
+      "stock": {
+        "crc": "0x1b9d5801",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x1b9d5801",
+        "source": "drivers/base/core.o.symversions"
+      }
+    },
+    {
+      "symbol": "_dev_info",
+      "status": "match",
+      "stock": {
+        "crc": "0x8634b838",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x8634b838",
+        "source": "drivers/base/core.o.symversions"
+      }
+    },
+    {
+      "symbol": "_dev_warn",
+      "status": "match",
+      "stock": {
+        "crc": "0x39b61007",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x39b61007",
+        "source": "drivers/base/core.o.symversions"
+      }
+    },
+    {
+      "symbol": "_raw_spin_lock_irqsave",
+      "status": "match",
+      "stock": {
+        "crc": "0x51760917",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x51760917",
+        "source": "kernel/locking/spinlock.o.symversions"
+      }
+    },
+    {
+      "symbol": "_raw_spin_unlock_irqrestore",
+      "status": "match",
+      "stock": {
+        "crc": "0x3812050a",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x3812050a",
+        "source": "kernel/locking/spinlock.o.symversions"
+      }
+    },
+    {
+      "symbol": "cancel_work_sync",
+      "status": "match",
+      "stock": {
+        "crc": "0x72394689",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x72394689",
+        "source": "kernel/workqueue.o.symversions"
+      }
+    },
+    {
+      "symbol": "crc32_le",
+      "status": "match",
+      "stock": {
+        "crc": "0xe78bfacd",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xe78bfacd",
+        "source": "lib/crc32.o.symversions"
+      }
+    },
+    {
+      "symbol": "device_create_file",
+      "status": "match",
+      "stock": {
+        "crc": "0x66a9aa8c",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x66a9aa8c",
+        "source": "drivers/base/core.o.symversions"
+      }
+    },
+    {
+      "symbol": "device_remove_file",
+      "status": "match",
+      "stock": {
+        "crc": "0x781bb29e",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x781bb29e",
+        "source": "drivers/base/core.o.symversions"
+      }
+    },
+    {
+      "symbol": "devm_input_allocate_device",
+      "status": "match",
+      "stock": {
+        "crc": "0x50e5d032",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x50e5d032",
+        "source": "drivers/input/input.o.symversions"
+      }
+    },
+    {
+      "symbol": "devm_kasprintf",
+      "status": "match",
+      "stock": {
+        "crc": "0x5ae59dc2",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x5ae59dc2",
+        "source": "drivers/base/devres.o.symversions"
+      }
+    },
+    {
+      "symbol": "devm_kmalloc",
+      "status": "match",
+      "stock": {
+        "crc": "0x7ca54300",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x7ca54300",
+        "source": "drivers/base/devres.o.symversions"
+      }
+    },
+    {
+      "symbol": "devm_of_led_classdev_register",
+      "status": "match",
+      "stock": {
+        "crc": "0x111a5da9",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x111a5da9",
+        "source": "drivers/leds/led-class.o.symversions"
+      }
+    },
+    {
+      "symbol": "devm_power_supply_register",
+      "status": "match",
+      "stock": {
+        "crc": "0xf0588502",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0xf0588502",
+        "source": "drivers/power/supply/power_supply_core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_debug",
+      "status": "match",
+      "stock": {
+        "crc": "0x05495392",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x05495392",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_hw_close",
+      "status": "match",
+      "stock": {
+        "crc": "0x28375077",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x28375077",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_hw_open",
+      "status": "match",
+      "stock": {
+        "crc": "0x1b31ede7",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x1b31ede7",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_hw_start",
+      "status": "match",
+      "stock": {
+        "crc": "0xf5c2eec3",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0xf5c2eec3",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_hw_stop",
+      "status": "match",
+      "stock": {
+        "crc": "0x360c2aba",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x360c2aba",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_open_report",
+      "status": "match",
+      "stock": {
+        "crc": "0x68271b4f",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x68271b4f",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_unregister_driver",
+      "status": "match",
+      "stock": {
+        "crc": "0xaf54076e",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0xaf54076e",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "hid_validate_values",
+      "status": "match",
+      "stock": {
+        "crc": "0xe9c65845",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0xe9c65845",
+        "source": "drivers/hid/hid-core.o.symversions"
+      }
+    },
+    {
+      "symbol": "ida_alloc_range",
+      "status": "match",
+      "stock": {
+        "crc": "0xa14ab2f3",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xa14ab2f3",
+        "source": "lib/idr.o.symversions"
+      }
+    },
+    {
+      "symbol": "ida_destroy",
+      "status": "match",
+      "stock": {
+        "crc": "0xe013f905",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xe013f905",
+        "source": "lib/idr.o.symversions"
+      }
+    },
+    {
+      "symbol": "ida_free",
+      "status": "match",
+      "stock": {
+        "crc": "0xadf4146a",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xadf4146a",
+        "source": "lib/idr.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_alloc_absinfo",
+      "status": "match",
+      "stock": {
+        "crc": "0x6ecd9213",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x6ecd9213",
+        "source": "drivers/input/input.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_event",
+      "status": "match",
+      "stock": {
+        "crc": "0xcb1b2a99",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xcb1b2a99",
+        "source": "drivers/input/input.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_ff_create_memless",
+      "status": "match",
+      "stock": {
+        "crc": "0xca43ee42",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0xca43ee42",
+        "source": "drivers/input/ff-memless.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_mt_init_slots",
+      "status": "match",
+      "stock": {
+        "crc": "0x4d0c74b0",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x4d0c74b0",
+        "source": "drivers/input/input-mt.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_mt_report_slot_state",
+      "status": "match",
+      "stock": {
+        "crc": "0x22159dde",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x22159dde",
+        "source": "drivers/input/input-mt.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_mt_sync_frame",
+      "status": "match",
+      "stock": {
+        "crc": "0x3b104630",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x3b104630",
+        "source": "drivers/input/input-mt.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_register_device",
+      "status": "match",
+      "stock": {
+        "crc": "0x82121f44",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x82121f44",
+        "source": "drivers/input/input.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_set_abs_params",
+      "status": "match",
+      "stock": {
+        "crc": "0xc37a8567",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xc37a8567",
+        "source": "drivers/input/input.o.symversions"
+      }
+    },
+    {
+      "symbol": "input_set_capability",
+      "status": "match",
+      "stock": {
+        "crc": "0xcb577aa3",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xcb577aa3",
+        "source": "drivers/input/input.o.symversions"
+      }
+    },
+    {
+      "symbol": "kfree",
+      "status": "match",
+      "stock": {
+        "crc": "0x037a0cba",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x037a0cba",
+        "source": "mm/slub.o.symversions"
+      }
+    },
+    {
+      "symbol": "kmalloc_caches",
+      "status": "match",
+      "stock": {
+        "crc": "0xcbf91bab",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xcbf91bab",
+        "source": "mm/slab_common.o.symversions"
+      }
+    },
+    {
+      "symbol": "kmem_cache_alloc_trace",
+      "status": "match",
+      "stock": {
+        "crc": "0xccfe2590",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xccfe2590",
+        "source": "mm/slub.o.symversions"
+      }
+    },
+    {
+      "symbol": "kmemdup",
+      "status": "match",
+      "stock": {
+        "crc": "0x448eac3e",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x448eac3e",
+        "source": "mm/util.o.symversions"
+      }
+    },
+    {
+      "symbol": "kstrtou8",
+      "status": "match",
+      "stock": {
+        "crc": "0x46045dd7",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x46045dd7",
+        "source": "lib/kstrtox.o.symversions"
+      }
+    },
+    {
+      "symbol": "module_layout",
+      "status": "match",
+      "stock": {
+        "crc": "0xf0c01ec5",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xf0c01ec5",
+        "source": "kernel/module.o.symversions"
+      }
+    },
+    {
+      "symbol": "param_ops_charp",
+      "status": "match",
+      "stock": {
+        "crc": "0x1d976435",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x1d976435",
+        "source": "kernel/params.o.symversions"
+      }
+    },
+    {
+      "symbol": "param_ops_uint",
+      "status": "match",
+      "stock": {
+        "crc": "0x4e6f951e",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x4e6f951e",
+        "source": "kernel/params.o.symversions"
+      }
+    },
+    {
+      "symbol": "power_supply_get_drvdata",
+      "status": "match",
+      "stock": {
+        "crc": "0xaf625b30",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0xaf625b30",
+        "source": "drivers/power/supply/power_supply_core.o.symversions"
+      }
+    },
+    {
+      "symbol": "power_supply_powers",
+      "status": "match",
+      "stock": {
+        "crc": "0x5cfe9ca7",
+        "kind": "EXPORT_SYMBOL_GPL"
+      },
+      "computed": {
+        "crc": "0x5cfe9ca7",
+        "source": "drivers/power/supply/power_supply_core.o.symversions"
+      }
+    },
+    {
+      "symbol": "printk",
+      "status": "match",
+      "stock": {
+        "crc": "0x7c32d0f0",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x7c32d0f0",
+        "source": "kernel/printk/printk.o.symversions"
+      }
+    },
+    {
+      "symbol": "queue_work_on",
+      "status": "match",
+      "stock": {
+        "crc": "0x04be4d8b",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x04be4d8b",
+        "source": "kernel/workqueue.o.symversions"
+      }
+    },
+    {
+      "symbol": "snprintf",
+      "status": "match",
+      "stock": {
+        "crc": "0x28318305",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x28318305",
+        "source": "lib/vsprintf.o.symversions"
+      }
+    },
+    {
+      "symbol": "sscanf",
+      "status": "match",
+      "stock": {
+        "crc": "0x20c55ae0",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x20c55ae0",
+        "source": "lib/vsprintf.o.symversions"
+      }
+    },
+    {
+      "symbol": "strcmp",
+      "status": "match",
+      "stock": {
+        "crc": "0xe2d5255a",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0xe2d5255a",
+        "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+      }
+    },
+    {
+      "symbol": "strlen",
+      "status": "match",
+      "stock": {
+        "crc": "0x98cf60b3",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x98cf60b3",
+        "source": "arch/arm64/kernel/arm64ksyms.o.symversions"
+      }
+    },
+    {
+      "symbol": "system_wq",
+      "status": "match",
+      "stock": {
+        "crc": "0x2d3385d3",
+        "kind": "EXPORT_SYMBOL"
+      },
+      "computed": {
+        "crc": "0x2d3385d3",
+        "source": "kernel/workqueue.o.symversions"
+      }
+    }
+  ]
+}
