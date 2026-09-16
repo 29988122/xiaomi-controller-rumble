@@ -15,7 +15,7 @@
 | 核心 | `4.19.191-gdecc267868f3`，ARM64 |
 | 手把 | GameSir G8+，DS4 藍牙模式 `054C:05C4` |
 | 實體／執行驗證 | Magisk Alpha 30700，使用完全相同 `.ko` 的私人前版 |
-| 公開 v0.2.0 安裝程式 | 自動化安裝介面契約測試；沒有重新安裝到手機 |
+| 公開 v0.2.1 安裝程式 | 18 項自動測試；在手機暫存目錄使用現有 Magisk 輔助函式執行 `customize.sh` 通過；未重做管理器完整安裝／啟用 |
 | KernelSU／KernelSU Next | ZIP 與腳本介面已查核、測試；**沒有實機驗證** |
 | 其他 root fork／手機／ROM | 未驗證；沒有相符 profile 就拒絕安裝 |
 
@@ -23,7 +23,7 @@
 
 ## 下載與安裝
 
-從 [v0.2.0 預覽版](https://github.com/29988122/xiaomi-controller-rumble/releases/tag/v0.2.0) 下載限定韌體的 ZIP 與 `SHA256SUMS`；[dist](dist/) 保存相同檔案。Magisk 與 KernelSU 系列共用 ZIP，但封裝相容不代表其中的核心二進位能用於不同核心。
+從 [v0.2.1 預覽版](https://github.com/29988122/xiaomi-controller-rumble/releases/tag/v0.2.1) 下載限定韌體的 ZIP 與 `SHA256SUMS`；[dist](dist/) 保存相同檔案。Magisk 與 KernelSU 系列共用 ZIP，但封裝相容不代表其中的核心二進位能用於不同核心。
 
 1. 核對支援表全部條件，準備可用的 USB ADB 復原連線與自己手機的 boot 備份。
 2. 連上**恰好一支** `054C:05C4` 的 DS4 藍牙手把，等一般輸入初始化完成；G8+ 是已實測型號。先斷開其他符合條件的手把。
@@ -32,6 +32,14 @@
 5. 開機與藍牙重連後會重新接管；保留原有回報間隔，不擅自套用其他調校值。
 
 手機上的模組不連網、不回傳資料，也不掛載或替換 `/system`，不需要為它安裝掛載用途的 metamodule 或 Zygisk。模組 ID 保留 `sony_g8ff_ruby`，避免與私人前版同時安裝兩個背景程序。更新會重新選定當下唯一已連線的手把，並再次預設停用。
+
+### 如果安裝失敗
+
+v0.2.1 會分別說明未找到手把、多支手把、驅動不符，以及 Sony 驅動尚未初始化等原因。找到一支符合條件的手把時，最多等待 20 秒；等待期間只讀取狀態，不載入或重新綁定驅動。
+
+若出現 `[controller:unbound]` 或 `[controller:initializing]`，請將手把完全關機再開機，以 DS4 模式重新連線，確認按鍵能操作後再安裝。藍牙顯示「已連線」，不代表核心驅動已成功初始化。這次實機失敗時，核心先記錄 `Failed to get calibration data from Dualshock 4`，再記錄 `failed to claim input`；重新連線後恢復正常的 `sony` 綁定與 4 ms 回報間隔。校正資料交換為何失敗，目前未確定；這次更新沒有跳過校正，也不能修復持續失敗的手把交握。
+
+詳見 [v0.2.1 修正與驗證](CHANGELOG.md)。核心驅動 `.ko` 維持原版。
 
 ### 查詢、停止與復原
 

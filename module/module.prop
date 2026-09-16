@@ -1,6 +1,6 @@
 id=sony_g8ff_ruby
 name=Xiaomi Controller Rumble — ruby profile
-version=0.2.0
-versionCode=2
+version=0.2.1
+versionCode=3
 author=29988122 and upstream Sony HID contributors
 description=Firmware-specific controller force feedback. Magisk/KernelSU-family ZIP; kernel ABI validation is independent of the root manager. Installs disabled.

@@ -7,7 +7,7 @@
 [ "$(getprop ro.build.fingerprint)" = "$G8FF_FINGERPRINT" ] || abort 'Unsupported ROM fingerprint.'
 [ "$(sha256sum "$MODPATH/bin/sony_g8ff.ko" | cut -d ' ' -f 1)" = "$G8FF_SHA256" ] || abort 'Driver checksum mismatch.'
 . "$MODPATH/lib/target.sh"
-pick_target || abort 'Connect exactly ONE supported DS4 Bluetooth controller and wait for initialization, then retry.'
+wait_for_target || abort "${G8FF_ERROR:-Controller changed while reading its state; reconnect and retry.}"
 # Validated hex address and numeric interval only; never execute HID metadata.
 cat "$MODPATH/profile.sh" > "$MODPATH/config.sh"
 printf "G8FF_UNIQ='%s'\nG8FF_POLL='%s'\n" "$G8FF_SELECTED_UNIQ" "$G8FF_SELECTED_POLL" >> "$MODPATH/config.sh"

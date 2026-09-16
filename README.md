@@ -15,7 +15,7 @@ Restore missing **Bluetooth controller force feedback** on a specifically valida
 | Kernel | `4.19.191-gdecc267868f3`, ARM64 |
 | Controller | GameSir G8+, DS4 Bluetooth mode `054C:05C4` |
 | Physical/runtime validation | Magisk Alpha 30700, private predecessor using the identical `.ko` |
-| Public v0.2.0 installer | Automated installation-contract tests; not reinstalled on the phone |
+| Public v0.2.1 installer | 18 automated tests; on-phone `customize.sh` check using installed Magisk helpers in a temporary directory; full manager install/activation not repeated |
 | KernelSU / KernelSU Next | ZIP and script contract reviewed/tested; **no hardware validation** |
 | Other root forks / phones / ROMs | Unverified; no matching profile means no install |
 
@@ -23,7 +23,7 @@ The stock Sony driver had `CONFIG_SONY_FF` disabled. The replacement `sony_g8ff`
 
 ## Download and install
 
-Download the firmware-specific ZIP and `SHA256SUMS` from [v0.2.0 prerelease](https://github.com/29988122/xiaomi-controller-rumble/releases/tag/v0.2.0). Identical assets are committed in [dist](dist/). The ZIP is shared by Magisk and KernelSU-family managers; compatible packaging does not make the embedded kernel binary compatible with a different kernel.
+Download the firmware-specific ZIP and `SHA256SUMS` from [v0.2.1 prerelease](https://github.com/29988122/xiaomi-controller-rumble/releases/tag/v0.2.1). Identical assets are committed in [dist](dist/). The ZIP is shared by Magisk and KernelSU-family managers; compatible packaging does not make the embedded kernel binary compatible with a different kernel.
 
 1. Check every row of the supported profile. Keep a working USB ADB recovery connection and a backup of your own boot image.
 2. Connect exactly **one** DS4 Bluetooth controller with ID `054C:05C4`; wait for its normal inputs to initialize. G8+ is the physically tested controller. Disconnect other matching controllers.
@@ -32,6 +32,14 @@ Download the firmware-specific ZIP and `SHA256SUMS` from [v0.2.0 prerelease](htt
 5. The controller will be rebound after boot and reconnects. Existing Bluetooth polling is retained rather than reset to a tuning preset.
 
 No network request or telemetry is made by the installed module. It does not mount or replace `/system`; no mounting metamodule or Zygisk is required for this module. Existing module ID `sony_g8ff_ruby` is retained to avoid installing a second watcher alongside the private predecessor. An update re-selects the single currently connected controller and starts disabled again.
+
+### If installation fails
+
+v0.2.1 distinguishes no controller, multiple controllers, unsupported driver and incomplete Sony initialization. For one valid controller, it waits up to 20 seconds for driver readiness without loading or rebinding a driver.
+
+If `[controller:unbound]` or `[controller:initializing]` appears, fully power the controller off/on, reconnect in DS4 mode, confirm normal inputs work and retry. Bluetooth can show “connected” even when the kernel driver failed to initialize. On the reported phone, the kernel logged `Failed to get calibration data from Dualshock 4` followed by `failed to claim input`; after reconnection it bound to `sony` normally with 4 ms polling. The underlying cause of that failed calibration exchange is unknown. This installer update does not bypass calibration or repair a persistently failing controller handshake.
+
+See [v0.2.1 changes and validation](CHANGELOG.md). The firmware-specific `.ko` is unchanged.
 
 ### Check, stop and recover
 

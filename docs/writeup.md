@@ -1,5 +1,7 @@
 # Recovering controller rumble when the available kernel source does not match the phone
 
+> Follow-up: v0.2.1 fixes installer readiness waiting and diagnostic messages after a real calibration failure. See [the changelog](../CHANGELOG.md) for the narrower on-phone installer check. The original investigation below describes v0.2.0.
+
 [繁體中文](writeup.zh-TW.md) · [Project README](../README.md)
 
 ## 1. A controller that worked, except for its motors

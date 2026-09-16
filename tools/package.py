@@ -37,7 +37,8 @@ def main():
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser()
     parser.add_argument('--profile', default='ruby-os2.0.8.0-umotwxm')
-    parser.add_argument('--output', type=Path, default=root / 'dist/xiaomi-controller-rumble-v0.2.0-ruby.zip')
+    version = dict(line.split('=', 1) for line in (root/'module/module.prop').read_text().splitlines() if '=' in line)['version']
+    parser.add_argument('--output', type=Path, default=root / f'dist/xiaomi-controller-rumble-v{version}-ruby.zip')
     args = parser.parse_args()
     digest = package(root, root / 'profiles' / args.profile, args.output)
     args.output.with_name('SHA256SUMS').write_text(f'{digest}  {args.output.name}\n')

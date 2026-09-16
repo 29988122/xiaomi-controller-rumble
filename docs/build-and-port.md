@@ -66,3 +66,10 @@ Installer tests provide the documented manager variables/helper-function contrac
 先按文章流程確認協定與載入條件，再新增獨立 profile，附完整版本、來源、設定、獨立 ABI、雜湊與驗證報告，不能放入個人裝置識別碼。來源修補、匯出實作清單、解析布局與工具鏈都可能要調整，不能直接套用 ruby 假設。使用上述 `PROFILE`／`--profile` 選取；證據與暫時載入／復原未經檢視前，不列為已支援。驗證表應分開記錄封裝、ABI、實體 FF、生命週期與應用程式結果。
 
 Root-manager contract references: [Magisk](https://topjohnwu.github.io/Magisk/guides.html), [KernelSU](https://kernelsu.org/guide/module.html), [KernelSU Next installer](https://github.com/KernelSU-Next/KernelSU-Next/blob/dev/userspace/ksud/src/installer.sh). No source code from those installers is redistributed in this project.
+
+
+### v0.2.1 installation follow-up / 安裝追蹤
+
+The 18 automated tests now cover unbound/late-ready controllers, identity changes during the bounded wait and specific diagnostic errors. After reconnecting the real G8+, the release ZIP's `customize.sh` passed on the phone using its installed Magisk 30.7 BusyBox and permission helpers, with `MODPATH` redirected to a disposable directory. The check verified the selected identity, 4 ms polling, root-only permissions and the disabled marker. No `.ko` was loaded, no real module directory was installed or activated, and the temporary files were removed. This is narrower than an end-to-end manager installation test. KernelSU hardware remains untested.
+
+18 項自動測試包含驅動未綁定、延後初始化、等待期間更換手把與分類錯誤提示。實機 G8+ 重新連線後，使用手機既有 Magisk 30.7 的 BusyBox 與權限函式，在一次性暫存目錄執行 ZIP 中的 `customize.sh` 成功；核對手把識別、4 ms 回報間隔、root 專用權限及停用標記。沒有載入 `.ko`、沒有寫入真正的模組安裝目錄或啟用模組，測試後已移除暫存。這不等於管理器完整安裝的端到端驗收；KernelSU 實機仍未測試。
