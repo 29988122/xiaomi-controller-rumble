@@ -14,9 +14,9 @@
 | Original `hid-ids.h` SHA-256 | `6187067ca026998f33ff8a3c890b831a106df422615c0e85ce6d8eebeb0a0d51` |
 | Build environment | Debian bookworm-slim, Linux x86_64; original image ID `160466e67bb85a4099d9d9c2356b4a6a64747b281a22c142efbd4539db1b8525` |
 
-The supplied kernel config and exported-symbol evidence came from the tested firmware. They contain no controller identity. Boot images and raw device dumps are not distributed. The supplied binaries are the exact previously tested artifacts; public packaging changes do not rebuild or patch them.
+The supplied kernel config and exported-symbol evidence came from the tested firmware. They contain no controller identity. Boot images and raw device dumps are not distributed. The kernel `.ko` remains the exact previously tested artifact. v0.3.0 rebuilds only the userspace FF helper to verify opened-device identity.
 
-附帶核心設定與匯出符號證據來自已測韌體，不包含手把識別碼。boot 與原始裝置傾印不公開。二進位為實測的原始產物，公開封裝沒有修改它們。
+附帶核心設定與匯出符號證據來自已測韌體，不包含手把識別碼。boot 與原始裝置傾印不公開。核心 `.ko` 維持實測的原始產物；v0.3.0 只重建使用者空間的 FF 測試程式，增加開啟裝置後的身分核對。
 
 ## Rebuild the ruby profile / 重建 ruby profile
 
@@ -51,9 +51,9 @@ python3 tools/verify_module.py profiles/ruby-os2.0.8.0-umotwxm/sony_g8ff.ko prof
 python3 tools/package.py
 ```
 
-Installer tests provide the documented manager variables/helper-function contracts and a synthetic sysfs tree. They do **not** boot KernelSU, emulate its kernel, or establish real manager installation success. Runtime recovery/reconnect evidence is from the Magisk private predecessor with the same driver and supervisor. Public profile selection is tested through fixtures. The phone was not changed during publication.
+Installer tests provide the documented manager variables/helper-function contracts and a synthetic sysfs tree. They do **not** boot KernelSU, emulate its kernel, or establish real manager installation success. Runtime recovery/reconnect evidence is from the Magisk private predecessor with the same kernel driver but the older supervisor. v0.3.0 changes the supervisor and uses fixtures, including Magisk 30.7 BusyBox shell tests. No v0.3.0 hardware test was performed.
 
-安裝器測試提供管理器變數／輔助函式介面與假的 sysfs；**沒有**啟動 KernelSU、模擬其核心，或證明實際管理器安裝成功。復原／重連證據來自使用相同驅動及管理程式的 Magisk 私人前版。公開版選定手把流程透過測試資料驗證，發布過程沒有改動手機。
+安裝器測試提供管理器變數／輔助函式介面與假的 sysfs；**沒有**啟動 KernelSU、模擬其核心，或證明實際管理器安裝成功。復原／重連證據來自使用相同核心驅動、舊管理程式的 Magisk 私人前版。v0.3.0 修改管理程式，使用模擬測試與 Magisk 30.7 BusyBox Shell 檢查；沒有 v0.3.0 實機測試。
 
 ## Add a profile / 新增 profile
 
@@ -73,3 +73,16 @@ Root-manager contract references: [Magisk](https://topjohnwu.github.io/Magisk/gu
 The 18 automated tests now cover unbound/late-ready controllers, identity changes during the bounded wait and specific diagnostic errors. After reconnecting the real G8+, the release ZIP's `customize.sh` passed on the phone using its installed Magisk 30.7 BusyBox and permission helpers, with `MODPATH` redirected to a disposable directory. The check verified the selected identity, 4 ms polling, root-only permissions and the disabled marker. No `.ko` was loaded, no real module directory was installed or activated, and the temporary files were removed. This is narrower than an end-to-end manager installation test. KernelSU hardware remains untested.
 
 18 項自動測試包含驅動未綁定、延後初始化、等待期間更換手把與分類錯誤提示。實機 G8+ 重新連線後，使用手機既有 Magisk 30.7 的 BusyBox 與權限函式，在一次性暫存目錄執行 ZIP 中的 `customize.sh` 成功；核對手把識別、4 ms 回報間隔、root 專用權限及停用標記。沒有載入 `.ko`、沒有寫入真正的模組安裝目錄或啟用模組，測試後已移除暫存。這不等於管理器完整安裝的端到端驗收；KernelSU 實機仍未測試。
+
+
+## v0.3.0 FF helper build / 測試程式建置
+
+The `.ko` still uses the pinned Android Clang toolchain above. The independent userspace helper can be built on Linux with `gcc-aarch64-linux-gnu`:
+
+```sh
+sh tools/build-ff-test.sh /tmp/ff_test
+```
+
+Release helper builds use the `ubuntu-22.04` GitHub runner and its cross-GCC package, with no libc/startup objects or build ID. The build workflow rebuilds twice and compares with the profile binary; compiler/package changes that alter output fail rather than silently replacing the hash. It runs the helper under QEMU against `/dev/null`, verifying rejection before any force-feedback effect when input identity cannot be established. The package pins both `.ko` and helper hashes. The helper's interface is `ff_test /dev/input/eventN expected_controller_uniq`; the opened evdev device must return the matching identity. No device address is embedded in it.
+
+`.ko` 仍使用前述固定 Android Clang。獨立測試程式改用 Ubuntu 22.04 CI 的交叉 GCC，無 libc／啟動函式庫或 build ID。CI 重建兩次並比對 profile 內二進位；工具鏈套件變更導致輸出不同時會失敗，不自動覆寫雜湊。QEMU 以 `/dev/null` 驗證無法確認身分時不送出 FF 指令。封裝同時固定驅動與測試程式雜湊，識別碼由呼叫端傳入，不寫進二進位。

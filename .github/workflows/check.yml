@@ -12,7 +12,26 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install pyelftools==0.33
       - run: python -m unittest discover -s tests -v
-      - run: bash -n tools/build.sh tools/prepare.sh
+      - run: bash -n tools/build.sh tools/prepare.sh tools/build-ff-test.sh
       - run: for f in module/*.sh module/bin/g8ffctl module/lib/*.sh; do sh -n "$f"; done
       - run: python tools/verify_module.py profiles/ruby-os2.0.8.0-umotwxm/sony_g8ff.ko profiles/ruby-os2.0.8.0-umotwxm/stock-symbols.json profiles/ruby-os2.0.8.0-umotwxm/computed-symbols.json /tmp/module-check.json --profile profiles/ruby-os2.0.8.0-umotwxm/profile.json
       - run: python tools/package.py && git diff --exit-code -- dist
+
+  magisk-shell:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Obtain pinned Magisk 30.7 BusyBox for shell and flock tests
+        run: |
+          curl -fL --retry 3 https://github.com/topjohnwu/Magisk/releases/download/v30.7/Magisk-v30.7.apk -o /tmp/magisk.apk
+          echo "e0d32d2123532860f97123d927b1bb86c4e08e6fd8a48bfc6b5bee0afae9ebd5  /tmp/magisk.apk" | sha256sum -c -
+          unzip -p /tmp/magisk.apk lib/x86_64/libbusybox.so > /tmp/magisk-busybox
+          chmod +x /tmp/magisk-busybox
+          /tmp/magisk-busybox --list | grep -x flock
+          /tmp/magisk-busybox --list | grep -x setsid
+      - run: python -m unittest discover -s tests -v
+        env:
+          TEST_BUSYBOX: /tmp/magisk-busybox

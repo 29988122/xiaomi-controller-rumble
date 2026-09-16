@@ -1,75 +1,76 @@
 # Xiaomi Controller Rumble
 
-[繁體中文](README.zh-TW.md) · [Technical write-up](docs/writeup.md) · [Build / porting](docs/build-and-port.md)
+[繁體中文](README.zh-TW.md) · [Technical write-up](docs/writeup.md) · [Build / porting](docs/build-and-port.md) · [Changelog](CHANGELOG.md)
 
-Restore missing **Bluetooth controller force feedback** on a specifically validated Xiaomi/Redmi stock kernel, without replacing its boot image. This project publishes a working Redmi `ruby` case study, a firmware-specific driver, and a method for investigating other devices whose available kernel sources do not match the shipping firmware.
-
-**The method is portable. The supplied `.ko` is not a universal Xiaomi driver.** Similar device age, Android version or a shared `4.19` prefix does not establish ABI compatibility. This concerns the controller's motors, not the phone's vibration motor.
-
-## Supported profile
-
-| Component | Verified case |
-|---|---|
-| Phone | Redmi Note 12 Pro 5G, `ruby`, model `22101316G` |
-| ROM | HyperOS `OS2.0.8.0.UMOTWXM`, Android 14 |
-| Kernel | `4.19.191-gdecc267868f3`, ARM64 |
-| Controller | GameSir G8+, DS4 Bluetooth mode `054C:05C4` |
-| Physical/runtime validation | Magisk Alpha 30700, private predecessor using the identical `.ko` |
-| Public v0.2.1 installer | 18 automated tests; on-phone `customize.sh` check using installed Magisk helpers in a temporary directory; full manager install/activation not repeated |
-| KernelSU / KernelSU Next | ZIP and script contract reviewed/tested; **no hardware validation** |
-| Other root forks / phones / ROMs | Unverified; no matching profile means no install |
-
-The stock Sony driver had `CONFIG_SONY_FF` disabled. The replacement `sony_g8ff` driver exposes standard `FF_RUMBLE`; Android then identifies the controller as a vibration-capable input device. A `.ko` runs in **kernel space**. The module's shell scripts run in userspace and manage loading, binding and recovery.
+Restore missing Bluetooth controller rumble on one validated Redmi firmware using a replacement Sony HID driver. The phone's boot image stays unchanged. **The included driver is firmware-specific; the investigation method can be adapted to other devices.** This restores the controller's motors.
 
 ## Download and install
 
-Download the firmware-specific ZIP and `SHA256SUMS` from [v0.2.1 prerelease](https://github.com/29988122/xiaomi-controller-rumble/releases/tag/v0.2.1). Identical assets are committed in [dist](dist/). The ZIP is shared by Magisk and KernelSU-family managers; compatible packaging does not make the embedded kernel binary compatible with a different kernel.
+Download [v0.3.0 preview](https://github.com/29988122/xiaomi-controller-rumble/releases/tag/v0.3.0) and its `SHA256SUMS`. [dist](dist/) contains identical files.
 
-1. Check every row of the supported profile. Keep a working USB ADB recovery connection and a backup of your own boot image.
-2. Connect exactly **one** DS4 Bluetooth controller with ID `054C:05C4`; wait for its normal inputs to initialize. G8+ is the physically tested controller. Disconnect other matching controllers.
-3. Install from your running root manager. Recovery installation is unsupported. An unmatched kernel/ROM, a damaged driver, zero/multiple matching controllers or incomplete controller initialization aborts installation.
-4. Installation stores the selected controller's unique ID **only on your phone** and leaves the module **disabled**. Reboot to finish installation, review the profile/recovery instructions, enable it in the manager, then reboot to activate.
-5. The controller will be rebound after boot and reconnects. Existing Bluetooth polling is retained rather than reset to a tuning preset.
+1. Check the compatibility table below. Install the ZIP from Magisk or a compatible KernelSU-family manager; do not extract it.
+2. **Reboot once.** Fresh installations are enabled automatically.
+3. If one supported controller was connected and ready during installation, it is already saved. Otherwise connect your G8+ in DS4 Bluetooth mode, leaving only that supported controller connected.
+4. Press the module's **Action** button to finish setup or check it. It sends a short test: left once, right twice. Confirm that you feel the rumble. **No second reboot is needed.**
 
-No network request or telemetry is made by the installed module. It does not mount or replace `/system`; no mounting metamodule or Zygisk is required for this module. Existing module ID `sony_g8ff_ruby` is retained to avoid installing a second watcher alongside the private predecessor. An update re-selects the single currently connected controller and starts disabled again.
+The controller can be absent, still initializing or one of several connected controllers during installation. Installation still completes in **setup pending** state. No replacement driver is loaded until a controller has been saved and is ready. The background service never chooses an unsaved controller by itself.
 
-### If installation fails
+The Action button waits up to 20 seconds for initialization. If it still fails, fully power the controller off/on, reconnect in DS4 mode and press Action again. Bluetooth “connected” alone does not prove that the Sony driver finished initialization. The module does not toggle Bluetooth or bypass failed calibration.
 
-v0.2.1 distinguishes no controller, multiple controllers, unsupported driver and incomplete Sony initialization. For one valid controller, it waits up to 20 seconds for driver readiness without loading or rebinding a driver.
+**v0.3.0's installer, Action and service lifecycle have not been tested on a real phone.** This preview is delivered with automated tests at the owner's request. The kernel `.ko` is identical to the previously physically tested driver; that evidence does not validate the new workflow. Keep USB ADB and your own recovery method available.
 
-If `[controller:unbound]` or `[controller:initializing]` appears, fully power the controller off/on, reconnect in DS4 mode, confirm normal inputs work and retry. Bluetooth can show “connected” even when the kernel driver failed to initialize. On the reported phone, the kernel logged `Failed to get calibration data from Dualshock 4` followed by `failed to claim input`; after reconnection it bound to `sony` normally with 4 ms polling. The underlying cause of that failed calibration exchange is unknown. This installer update does not bypass calibration or repair a persistently failing controller handshake.
+## Compatibility
 
-See [v0.2.1 changes and validation](CHANGELOG.md). The firmware-specific `.ko` is unchanged.
+| Component | Scope |
+|---|---|
+| Phone | Redmi Note 12 Pro 5G, `ruby`, `22101316G` |
+| ROM | HyperOS `OS2.0.8.0.UMOTWXM`, Android 14 |
+| Kernel | `4.19.191-gdecc267868f3`, ARM64 |
+| Controller | GameSir G8+, DS4 Bluetooth `054C:05C4` |
+| Historical driver hardware validation | Magisk Alpha 30700, predecessor using identical `.ko` |
+| v0.3.0 workflow | Simulated installation/runtime tests; **no phone installation, reboot or physical Action test** |
+| KernelSU / Next | Common ZIP/script contracts; **no hardware validation** |
+| Other phones, firmware or protocols | Unsupported by this binary |
 
-### Check, stop and recover
+Nintendo, Xbox and Steam Controller protocols are not added by this release. A similar Android/kernel version does not establish compatibility. Installing a KernelSU-patched kernel can invalidate this profile even on the same phone.
 
-From a root shell:
+This ZIP does not mount `/system`; it needs no mounting metamodule or Zygisk. Use a current manager with an Action button and BusyBox `flock` / `setsid`. Magisk 30.7 is the shell-compatibility baseline. There is no network request or telemetry. The selected controller identity stays on the phone.
+
+## Updating and everyday use
+
+- Update by installing the newer ZIP under the same module ID, `sony_g8ff_ruby`, then reboot once. Valid saved settings are preserved even if the controller is offline.
+- A previously disabled module remains disabled. After the update reboot, enable its switch and press Action to start; no further reboot is needed.
+- Pressing Action while an installation/update still needs a reboot shows that next step rather than launching staged code.
+- Boot and reconnection are silent: no automatic motor tests. Only Action triggers the short test.
+- A different controller never replaces the saved one automatically. This version has no controller-switching UI.
+- Chinese system locales receive Traditional Chinese messages; other locales receive English.
+
+## Disable and recover
+
+Turn off the module in your root manager. The running service attempts to restore the stock Sony driver after any in-flight test ends. If the controller does not recover, disconnect/reconnect it or reboot with the module disabled.
+
+For root-shell diagnostics:
 
 ```sh
 sh /data/adb/modules/sony_g8ff_ruby/bin/g8ffctl status
 ```
 
-To disable immediately and prevent next-boot activation:
+To stop now and prevent next-boot activation:
 
 ```sh
 touch /data/adb/modules/sony_g8ff_ruby/disable
 sh /data/adb/modules/sony_g8ff_ruby/bin/g8ffctl stop
 ```
 
-The manager's disable switch followed by a reboot is another recovery path. `stop` ends this module's worker, rebinds the selected controller to stock `sony`, and unloads `sony_g8ff`. See the root manager's recovery documentation if Android cannot finish booting: [Magisk](https://topjohnwu.github.io/Magisk/faq.html), [KernelSU](https://kernelsu.org/guide/rescue-from-bootloop.html).
+ROM/kernel mismatches block activation. Never edit the checks or vermagic to force installation. See [Magisk recovery](https://topjohnwu.github.io/Magisk/faq.html) / [KernelSU recovery](https://kernelsu.org/guide/rescue-from-bootloop.html).
 
-After a ROM/kernel update the guard refuses unmatched versions. Do not edit the guard or vermagic to force compatibility; build and validate a new profile. Moving to a KernelSU-patched kernel can also require a new profile, even on the same phone.
+## What the evidence establishes
 
-## What was actually verified
+The predecessor's owner confirmed both motors through raw HID and standard FF. Three Bluetooth reconnects, screen doze/wake, reboot loading and disable-to-stock were checked. Boot hash was unchanged; SELinux, CFI and MODVERSIONS remained enforced. This was not a deep-suspend endurance test. Steam Link, in-game controls/latency and a 30-minute game session remain untested.
 
-- The owner confirmed both motors with raw HID output and again through kernel `FF_RUMBLE`.
-- Android exposed a vibrator input mapper. Three consecutive Bluetooth reconnections passed after fixing a probe-initialization race.
-- Screen doze (`Dozing`) → wake (`Awake`), reboot autoload, disable-to-stock and re-enable were checked. This is not a deep-suspend endurance test.
-- Polling remained 4 ms in the tested setup; stock boot-image hash was unchanged. SELinux, CFI and MODVERSIONS were not disabled.
-- The original driver input interfaces remained present. **Steam Link, in-game controls/latency and a 30-minute game session were not tested**, at the owner's request. On this setup Low Latency Video had already been disabled to address a separate latency issue.
-- The `.ko` rebuilt byte-for-byte identically. All 61 required export CRCs matched independently built evidence; 624 computed exports matched stock. These checks complement, not replace, runtime testing.
+v0.3.0 keeps that `.ko` but changes the installation/service scripts and user-space FF test helper. The helper now verifies the opened input device's identity before sending effects, protecting against recycled event numbers. It has a reproducible cross-build and a QEMU rejection check; its new identity check has not been exercised against physical hardware.
 
-The detailed [English](docs/writeup.md) / [繁體中文](docs/writeup.zh-TW.md) write-up explains the successful path, failed probes, nine reconstructed enum entries and what this evidence does **not** prove.
+Automated tests simulate deferred setup, migration, disabled states, disconnects, concurrent actions/workers and recovery. CI also checks scripts using Magisk's actual x86_64 BusyBox shell and `flock`; sysfs and manager installation helpers are still simulated. These tests do not boot Android or establish manager end-to-end success. See [build / validation](docs/build-and-port.md).
 
 ## Development and contributions
 
@@ -79,12 +80,12 @@ python3 -m unittest discover -s tests -v
 python3 tools/package.py
 ```
 
-See [build and porting](docs/build-and-port.md) for pinned source/toolchain downloads, Linux-container commands, ABI gates and adding a profile. Firmware profiles separate version assumptions and artifacts from the common installer; the existing build/export layout remains a **ruby ARM64 case-study implementation**, not an automatic kernel reverse-engineering tool.
+See the [English](docs/writeup.md) / [中文](docs/writeup.zh-TW.md) investigation and [porting guide](docs/build-and-port.md). The driver matched 61 required symbol CRCs with independently computed evidence; 624 computed exports matched stock. CRCs are supporting evidence, not universal ABI proof.
 
-For an [issue](https://github.com/29988122/xiaomi-controller-rumble/issues), include device codename, ROM fingerprint, kernel release, controller mode/VID:PID, root-manager version, phase of failure and a minimal redacted log. Do not upload boot images, device addresses, serials or full system dumps. A new-profile contribution needs independently computed ABI evidence and temporary-load/recovery results before being advertised as supported. Prefer a draft report if no safe runtime test is available.
+[Report an issue](https://github.com/29988122/xiaomi-controller-rumble/issues) with device/ROM/kernel, controller mode, manager version and a minimal redacted error log. Exclude serials, Bluetooth addresses, boot images and full system dumps. New profiles need their own build/ABI and runtime evidence.
 
 ## Credits and license
 
-Project and physical test coordination: [29988122](https://github.com/29988122), with AI-assisted investigation, implementation and documentation. Physical motor confirmation came from the owner; software checks alone were not counted as physical validation. No claim of inventing Linux force feedback or being the first to rebind a driver is made.
+Project and physical test coordination: [29988122](https://github.com/29988122), with AI-assisted investigation, implementation and documentation. Physical motor confirmation came from the owner. No claim of inventing Linux force feedback is made.
 
-The driver is derived from [Xiaomi's published Sony HID driver](https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/914ba8403bb3a957ed37b99dcecdbafce9d16121/drivers/hid/hid-sony.c), retaining its upstream copyright/license notices. New project code is GPL-2.0-or-later; individual imported files retain their notices. See [LICENSE](LICENSE) and [source provenance](docs/build-and-port.md#provenance).
+The driver derives from [Xiaomi's Sony HID source](https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/914ba8403bb3a957ed37b99dcecdbafce9d16121/drivers/hid/hid-sony.c), retaining upstream notices. New project code is GPL-2.0-or-later; imported files retain their licenses. See [LICENSE](LICENSE) and [provenance](docs/build-and-port.md#provenance).

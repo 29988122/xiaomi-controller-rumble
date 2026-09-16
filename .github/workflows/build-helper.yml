@@ -15,6 +15,11 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu qemu-user
       - run: sh tools/build-ff-test.sh /tmp/ff_test
+      - name: Verify reproducible helper matches the packaged binary
+        run: |
+          sh tools/build-ff-test.sh /tmp/ff_test-again
+          cmp /tmp/ff_test /tmp/ff_test-again
+          cmp /tmp/ff_test profiles/ruby-os2.0.8.0-umotwxm/ff_test
       - name: Reject unverifiable input without sending an effect
         run: |
           set +e

@@ -43,9 +43,4 @@ llvm-readelf -h -S "$DRIVER_DIR/sony_g8ff.ko" > "$EVIDENCE/module-elf.txt"
 llvm-nm "$DRIVER_DIR/sony_g8ff.ko" | grep -E '(__cfi_check|__cfi_slowpath|sony_play_effect)' > "$EVIDENCE/module-cfi.txt"
 test -s "$EVIDENCE/module-cfi.txt"
 sha256sum "$DRIVER_DIR/sony_g8ff.ko" > "$EVIDENCE/module.sha256"
-clang --target=aarch64-linux-android -D__KERNEL__ -nostdlib -static -fuse-ld=lld \
-    -fno-stack-protector -ffreestanding -fno-builtin -O2 \
-    -I"$KERNEL_SRC/include/uapi" -I"$KERNEL_SRC/arch/arm64/include/uapi" \
-    -I"$OUT_DIR/arch/arm64/include/generated/uapi" -I"$KERNEL_SRC/include" \
-    -I"$KERNEL_SRC/arch/arm64/include" -I"$OUT_DIR/include" \
-    "$TASK_SRC/tools/ff_test.c" -o "${FF_TEST_OUT:-/work/ff_test}"
+sh "$TASK_SRC/tools/build-ff-test.sh" "${FF_TEST_OUT:-/work/ff_test}"

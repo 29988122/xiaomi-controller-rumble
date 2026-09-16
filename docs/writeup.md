@@ -1,5 +1,7 @@
 # Recovering controller rumble when the available kernel source does not match the phone
 
+> v0.3.0 adds one-reboot installation and deferred setup through Action. The kernel driver is unchanged; the new service and FF helper are software-tested only. See [current instructions](../README.md) and [validation limits](../CHANGELOG.md).
+
 > Follow-up: v0.2.1 fixes installer readiness waiting and diagnostic messages after a real calibration failure. See [the changelog](../CHANGELOG.md) for the narrower on-phone installer check. The original investigation below describes v0.2.0.
 
 [繁體中文](writeup.zh-TW.md) · [Project README](../README.md)

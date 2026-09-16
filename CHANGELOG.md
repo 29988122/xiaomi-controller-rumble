@@ -1,5 +1,31 @@
 # Changelog / 更新紀錄
 
+## v0.3.0 — one reboot, deferred setup / 一次重開機、稍後設定
+
+### English
+
+- Fresh installs are enabled. Reboot once; Action completes setup or tests rumble without another reboot.
+- No controller, multiple candidates or incomplete initialization leave setup pending instead of failing installation. Pending services neither load a driver nor choose a controller automatically.
+- Migrate validated literal controller settings from v0.2.1 without executing old config code; preserve disabled state on upgrade.
+- Share lifecycle logic and kernel file locks across Action and the watcher. Reject staged/same-boot activation, concurrent actions and duplicate workers. Dead processes do not leave held locks.
+- Traditional Chinese/English messages explain the next step. Action is the only path that runs the bounded motor test.
+- Keep the previously validated kernel `.ko` unchanged. Rebuild the userspace FF helper with an opened-device identity check before sending effects, so a recycled event number cannot target another controller.
+- 36 simulated tests cover install/setup, migration, delays, disconnects, concurrency, targeting and restoration. CI checks POSIX and Magisk 30.7 BusyBox shells, final kernel ELF/CRC evidence, reproducible ZIP and the cross-built helper's fail-closed behavior under QEMU.
+
+**No v0.3.0 phone installation, reboot or physical motor test was performed.** The owner chose delivery without a connected phone. KernelSU/Next hardware and gameplay remain untested. The Magisk shell tests use the real x86_64 BusyBox executable with simulated sysfs and installation helpers, not a booted Android system.
+
+### 繁體中文
+
+- 首次安裝預設啟用，重開機一次後，按「動作」完成設定或測試震動，不需再重開機。
+- 沒有手把、多支候選或尚未初始化時，安裝仍完成並保留待設定狀態；背景服務不會自行挑選手把或載入驅動。
+- 更新保留 v0.2.1 的有效手把設定與停用意圖；只解析合法欄位，不執行舊設定的 Shell 程式。
+- 「動作」與背景服務共用生命週期與核心檔案鎖，阻止重開機前啟動、重複操作和重複服務；程序結束就釋放鎖。
+- 繁體中文／英文提示直接說明下一步。只有按「動作」才執行有限時長的震動測試。
+- 核心 `.ko` 完全不變。重建使用者空間的測試程式，打開輸入裝置後核對身分，防止斷線後裝置編號被重用而測到其他手把。
+- 36 項模擬測試涵蓋安裝、稍後設定、更新、延遲、斷線、並行操作、選定目標與復原；CI 檢查 POSIX／Magisk 30.7 BusyBox Shell、核心 ELF／CRC、可重現封裝與 QEMU 下的拒絕錯誤輸入行為。
+
+**本版未進行手機安裝、重開機或實體震動驗收。** 使用者選擇在手機未連線的情況下交付；KernelSU／Next 實機與遊戲仍未測。Magisk Shell 測試使用真正的 x86_64 BusyBox，但 sysfs 與安裝輔助函式為模擬，並非開機後的 Android。
+
 ## v0.2.1
 
 ### English

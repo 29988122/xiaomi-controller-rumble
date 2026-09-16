@@ -68,6 +68,9 @@ else:
 ''')
         # Fake FF device is independent of kernel operation mocks and records the exact target.
         self.shell('ff_fixture','echo "$1" >> "$TEST_TMP/rumble-targets"; '+sys.executable+' -c "import os,time;time.sleep(float(os.environ.get(\'TEST_FF_SLEEP\',\'0\')))"; test -f "$1"')
+        if os.environ.get('TEST_BUSYBOX'):
+            self.shell('flock','exec "$TEST_BUSYBOX" flock "$@"')
+            self.shell('sh','exec "$TEST_BUSYBOX" sh "$@"')
         self.runner=self.tmp/'installer.sh'
         self.runner.write_text('''abort() { echo "ABORT: $*"; exit 17; }
 ui_print() { echo "$*"; }

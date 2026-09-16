@@ -87,3 +87,56 @@ class RuntimeTests(unittest.TestCase):
     def test_firmware_mismatch_never_loads(self):
         self.prepare();self.assertNotEqual(self.f.ctl('action',TEST_KERNEL='other').returncode,0)
         self.assertFalse((self.f.tmp/'mutations').exists())
+
+    def test_controller_disconnects_during_rumble(self):
+        self.prepare();cmd=['sh',str(self.f.mod/'bin/g8ffctl'),'action']
+        p=subprocess.Popen(cmd,env=dict(self.f.env,TEST_FF_SLEEP='0.5'),stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+        try:
+            deadline=time.monotonic()+5
+            while not (self.f.tmp/'rumble-targets').exists() and time.monotonic()<deadline:time.sleep(.02)
+            (self.f.dev/'event1').unlink()
+            out,err=p.communicate(timeout=5)
+            self.assertNotEqual(p.returncode,0);self.assertIn('did not complete',out)
+            self.assertEqual(len((self.f.tmp/'rumble-targets').read_text().splitlines()),1)
+        finally:
+            if p.poll() is None:p.kill();p.wait()
+    def test_disconnect_during_initialization_does_not_save_identity(self):
+        self.prepare(False);d=self.f.controller(poll=None)
+        hook=self.f.tmp/'tick.sh';hook.write_text('rm -f "'+str(d/'uevent')+'"\n')
+        r=self.f.ctl('action',TEST_TICK_SCRIPT=str(hook))
+        self.assertNotEqual(r.returncode,0);self.assertFalse((self.f.mod/'config.sh').exists())
+        self.assertFalse((self.f.tmp/'mutations').exists())
+    def test_second_controller_appears_during_setup(self):
+        self.prepare(False);self.f.controller(poll=None)
+        hook=self.f.tmp/'tick.sh';other=self.f.devices/'second'
+        hook.write_text('mkdir -p "'+str(other)+'"\nprintf "HID_ID=0005:0000054C:000005C4\\nHID_UNIQ=02:00:00:00:00:02\\n" > "'+str(other/'uevent')+'"\n')
+        r=self.f.ctl('action',TEST_TICK_SCRIPT=str(hook))
+        self.assertNotEqual(r.returncode,0);self.assertIn('Multiple',r.stdout)
+        self.assertFalse((self.f.mod/'config.sh').exists())
+    def test_background_watchers_do_not_bind_twice(self):
+        self.prepare();command=['sh',str(self.f.mod/'bin/g8ffctl'),'watch']
+        a=subprocess.Popen(command,env=self.f.env,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        b=subprocess.Popen(command,env=self.f.env,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        try:
+            deadline=time.monotonic()+5
+            while time.monotonic()<deadline:
+                if (self.f.mod/'run/state').exists() and (self.f.mod/'run/state').read_text().strip()=='ready':break
+                time.sleep(.02)
+            self.assertEqual((self.f.mod/'run/state').read_text().strip(),'ready')
+            mutations=(self.f.tmp/'mutations').read_text()
+            self.assertEqual(mutations.count('sony/unbind '),1)
+            self.assertEqual(mutations.count('sony_g8ff/bind '),1)
+            self.assertFalse((self.f.tmp/'rumble-targets').exists())
+        finally:
+            for proc in [a,b]:
+                if proc.poll() is None:proc.terminate()
+                proc.wait(timeout=3)
+    def test_disable_running_worker_restores_stock(self):
+        d=self.prepare();self.assertEqual(self.f.ctl('action').returncode,0)
+        (self.f.mod/'disable').touch()
+        deadline=time.monotonic()+5
+        while time.monotonic()<deadline:
+            if (d/'driver').is_symlink() and (d/'driver').readlink().name=='sony' and not (self.f.sys/'module/sony_g8ff').exists():break
+            time.sleep(.02)
+        self.assertEqual((d/'driver').readlink().name,'sony')
+        self.assertFalse((self.f.sys/'module/sony_g8ff').exists())
