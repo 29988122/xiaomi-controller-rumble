@@ -1,19 +1,79 @@
 #!/system/bin/sh
-# This script must run as root. It never changes SELinux or module verification.
-set -u
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Kernel flock locks are released on process exit, including crashes/reboots.
 G8FF_DIR=${0%/bin/g8ffctl}
-. "$G8FF_DIR/config.sh"
-G8FF_LOCK="$G8FF_DIR/run/lock"
-mkdir -p "$G8FF_DIR/run"
-
+umask 077
+. "$G8FF_DIR/lib/common.sh"
+. "$G8FF_DIR/profile.sh"
+. "$G8FF_DIR/lib/target.sh"
+G8FF_BOOT=$(cat /proc/sys/kernel/random/boot_id) || exit 1
+mkdir -p "$G8FF_DIR/run" || exit 1
+state() { printf '%s\n' "$1" > "$G8FF_DIR/run/state.tmp.$$" && mv -f "$G8FF_DIR/run/state.tmp.$$" "$G8FF_DIR/run/state"; }
 log() { printf '%s %s\n' "$(date +%s)" "$*" >> "$G8FF_DIR/run/events.log"; }
-compatible() {
-    [ "$(uname -r)" = "$G8FF_KERNEL" ] &&
-    [ "$(getprop ro.build.fingerprint)" = "$G8FF_FINGERPRINT" ] &&
-    [ "$(sha256sum "$G8FF_DIR/bin/sony_g8ff.ko" | cut -d ' ' -f 1)" = "$G8FF_SHA256" ]
+operation_lock() { exec 9>"$G8FF_DIR/run/operation.lock"; flock -n 9; }
+unlock() { flock -u 9; exec 9>&-; }
+exclusive_action() { exec 7>"$G8FF_DIR/run/action.lock"; flock -n 7; }
+active() { [ ! -e "$G8FF_DIR/disable" ] && [ ! -e "$G8FF_DIR/remove" ]; }
+stopped() { [ "$(cat "$G8FF_DIR/run/stop.boot" 2>/dev/null)" = "$G8FF_BOOT" ]; }
+failed() { [ "$(cat "$G8FF_DIR/run/failure.boot" 2>/dev/null)" = "$G8FF_BOOT" ]; }
+pending_reboot() {
+    case "$G8FF_DIR" in */modules_update/*) return 0;; esac
+    [ "$(cat "$G8FF_DIR/install.boot" 2>/dev/null)" = "$G8FF_BOOT" ] ||
+    [ -e "$G8FF_DIR/update" ] || [ -e /data/adb/modules_update/sony_g8ff_ruby/module.prop ]
+}
+guard() {
+    if pending_reboot; then
+        msg '安裝或更新尚未完成，請先重新開機一次。' 'Installation/update is pending. Reboot once first.'; return 1
+    fi
+    if ! active; then
+        msg '模組目前已停用或等待移除。請先在管理器開啟模組，再按「動作」。' 'The module is disabled or marked for removal. Enable it in the manager, then press Action.'; return 1
+    fi
+    if ! compatible; then
+        state incompatible
+        msg '手機版本或模組檔案不符合，未啟動。請查看版本支援表或重新下載。' 'Phone version or module files do not match; not started. Check supported versions or download again.'; return 1
+    fi
+    command -v flock >/dev/null && command -v setsid >/dev/null || return 1
+}
+is_target() {
+    [ -r "$1/uevent" ] && grep -qx 'HID_ID=0005:0000054C:000005C4' "$1/uevent" &&
+    [ "$(sed -n 's/^HID_UNIQ=//p' "$1/uevent")" = "$G8FF_UNIQ" ]
+}
+kernel_write() { printf '%s' "$2" > "$1"; }
+driver_of() { G8FF_LINK=$(readlink "$1/driver" 2>/dev/null); printf '%s' "${G8FF_LINK##*/}"; }
+find_target() {
+    G8FF_DEV=''; G8FF_MATCHES=0; G8FF_OTHER=0
+    for G8FF_PATH in /sys/bus/hid/devices/*; do
+        if is_target "$G8FF_PATH"; then
+            G8FF_DEV=$G8FF_PATH; G8FF_MATCHES=$((G8FF_MATCHES + 1))
+        elif [ -r "$G8FF_PATH/uevent" ] && grep -qx 'HID_ID=0005:0000054C:000005C4' "$G8FF_PATH/uevent"; then
+            G8FF_OTHER=1
+        fi
+    done
+    [ "$G8FF_MATCHES" -eq 1 ]
+}
+# This profile is ARM64: FF_RUMBLE (bit 80) is bit 16 of the penultimate 64-bit word.
+find_ff_event() {
+    is_target "$G8FF_DEV" || return 1
+    [ "$(driver_of "$G8FF_DEV")" = sony_g8ff ] || return 1
+    G8FF_EVENT=''
+    for G8FF_INPUT in "$G8FF_DEV"/input/input*; do
+        G8FF_BITS=$(cat "$G8FF_INPUT/capabilities/ff" 2>/dev/null) || continue
+        set -- $G8FF_BITS
+        [ "$#" -ge 2 ] || continue
+        while [ "$#" -gt 2 ]; do shift; done
+        case "$1" in ''|*[!0-9a-fA-F]*) continue;; esac
+        [ "${#1}" -le 16 ] || continue
+        [ $((0x$1 & 0x10000)) -ne 0 ] || continue
+        for G8FF_NODE in "$G8FF_INPUT"/event*; do
+            [ -d "$G8FF_NODE" ] || continue
+            G8FF_EVENT=/dev/input/${G8FF_NODE##*/}
+            [ -c "$G8FF_EVENT" ] && return 0
+        done
+    done
+    return 1
 }
 load_driver() {
-    compatible || { log 'Compatibility check failed; driver not loaded'; return 1; }
+    compatible || return 1
     if [ -d /sys/module/sony_g8ff ]; then
         [ "$(cat /sys/module/sony_g8ff/parameters/target_uniq)" = "$G8FF_UNIQ" ] || return 1
     else
@@ -21,96 +81,156 @@ load_driver() {
         log 'Driver loaded'
     fi
 }
-is_target() {
-    [ -r "$1/uevent" ] &&
-    grep -qx 'HID_ID=0005:0000054C:000005C4' "$1/uevent" 2>/dev/null &&
-    grep -qx "HID_UNIQ=$G8FF_UNIQ" "$1/uevent" 2>/dev/null
-}
-driver_of() { basename "$(readlink "$1/driver")"; }
-bind_once() {
-    for G8FF_DEV in /sys/bus/hid/devices/*; do
-        is_target "$G8FF_DEV" || continue
-        G8FF_CURRENT=$(driver_of "$G8FF_DEV")
-        # HID appears before the original probe finishes creating its attributes.
-        [ -z "$G8FF_CURRENT" ] && continue
-        [ "$G8FF_CURRENT" = sony_g8ff ] && continue
-        [ "$G8FF_CURRENT" = sony ] || { log "Unexpected driver: $G8FF_CURRENT"; return 1; }
-        G8FF_ID=${G8FF_DEV##*/}
-        [ -r "$G8FF_DEV/bt_poll_interval" ] || continue
-        G8FF_OLD_POLL=$(cat "$G8FF_DEV/bt_poll_interval" 2>/dev/null) || continue
-        printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony/unbind || { [ -e "$G8FF_DEV" ] && return 1; continue; }
-        if ! printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony_g8ff/bind; then
-            [ -e "$G8FF_DEV" ] || continue
-            printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony/bind
-            log 'Binding failed; attempted stock-driver restore'
-            return 1
-        fi
-        printf '%s' "$G8FF_OLD_POLL" > "$G8FF_DEV/bt_poll_interval" || { [ -e "$G8FF_DEV" ] && return 1; continue; }
-        log "Bound $G8FF_ID; poll interval preserved"
-    done
-}
 restore() {
-    for G8FF_DEV in /sys/bus/hid/devices/*; do
-        is_target "$G8FF_DEV" || continue
-        [ "$(driver_of "$G8FF_DEV")" = sony_g8ff ] || continue
-        G8FF_ID=${G8FF_DEV##*/}
-        G8FF_OLD_POLL=$(cat "$G8FF_DEV/bt_poll_interval") || { [ -e "$G8FF_DEV" ] && return 1; continue; }
-        printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony_g8ff/unbind || { [ -e "$G8FF_DEV" ] && return 1; continue; }
-        [ -e "$G8FF_DEV" ] || continue
-        printf '%s' "$G8FF_ID" > /sys/bus/hid/drivers/sony/bind || { [ -e "$G8FF_DEV" ] && return 1; continue; }
-        printf '%s' "$G8FF_OLD_POLL" > "$G8FF_DEV/bt_poll_interval" || { [ -e "$G8FF_DEV" ] && return 1; continue; }
+    read_config "$G8FF_DIR/config.sh" || { [ ! -d /sys/module/sony_g8ff ]; return; }
+    if [ -d /sys/module/sony_g8ff ]; then
+        [ "$(cat /sys/module/sony_g8ff/parameters/target_uniq)" = "$G8FF_UNIQ" ] || return 1
+    fi
+    for G8FF_PATH in /sys/bus/hid/devices/*; do
+        is_target "$G8FF_PATH" || continue
+        G8FF_CURRENT=$(driver_of "$G8FF_PATH")
+        [ "$G8FF_CURRENT" = sony_g8ff ] || continue
+        G8FF_RESTORE_POLL=$(cat "$G8FF_PATH/bt_poll_interval") || return 1
+        valid_poll "$G8FF_RESTORE_POLL" || return 1
+        kernel_write /sys/bus/hid/drivers/sony_g8ff/unbind "${G8FF_PATH##*/}" || return 1
+        [ -e "$G8FF_PATH" ] || continue
+        kernel_write /sys/bus/hid/drivers/sony/bind "${G8FF_PATH##*/}" || return 1
+        [ "$(driver_of "$G8FF_PATH")" = sony ] || return 1
+        printf '%s' "$G8FF_RESTORE_POLL" > "$G8FF_PATH/bt_poll_interval" || return 1
     done
     if [ -d /sys/module/sony_g8ff ]; then rmmod sony_g8ff || return 1; fi
-    log 'Restored stock driver'
+    state stopped; log 'Stock restore verified'
 }
-stop_worker() {
-    if [ -r "$G8FF_LOCK/pid" ]; then
-        G8FF_PID=$(cat "$G8FF_LOCK/pid")
-        case "$G8FF_PID" in ''|*[!0-9]*) return 1;; esac
-        if [ -r "/proc/$G8FF_PID/cmdline" ]; then
-            tr '\000' ' ' < "/proc/$G8FF_PID/cmdline" | grep -Fq "$G8FF_DIR/bin/g8ffctl" || return 1
-            kill "$G8FF_PID" || return 1
-            G8FF_WAIT=0
-            while kill -0 "$G8FF_PID" 2>/dev/null; do
-                G8FF_WAIT=$((G8FF_WAIT + 1)); [ "$G8FF_WAIT" -le 10 ] || return 1
-                sleep 1
-            done
+binding_error() {
+    printf '%s\n' "$G8FF_BOOT" > "$G8FF_DIR/run/failure.boot"
+    if restore; then state error_restored; else state error_restore_failed; fi
+    log 'Binding failed; automatic retries paused for this boot'
+    return 1
+}
+# 0=ready, 2=waiting (no mutation), 1=error (attempted rollback).
+ensure_binding() {
+    if ! find_target; then
+        if [ "$G8FF_MATCHES" -gt 1 ]; then state ambiguous; return 2; fi
+        if [ "$G8FF_OTHER" -eq 1 ]; then state other_controller; else state waiting; fi
+        return 2
+    fi
+    G8FF_CURRENT=$(driver_of "$G8FF_DEV")
+    case "$G8FF_CURRENT" in
+        '') state initializing; return 2;;
+        sony|sony_g8ff) ;;
+        *) state unsupported_driver; return 1;;
+    esac
+    G8FF_OLD_POLL=$(cat "$G8FF_DEV/bt_poll_interval" 2>/dev/null) || { state initializing; return 2; }
+    valid_poll "$G8FF_OLD_POLL" || { state invalid_poll; return 1; }
+    load_driver || { state load_failed; return 1; }
+    if [ "$G8FF_CURRENT" = sony ]; then
+        is_target "$G8FF_DEV" || { state waiting; return 2; }
+        G8FF_ID=${G8FF_DEV##*/}
+        kernel_write /sys/bus/hid/drivers/sony/unbind "$G8FF_ID" || { [ ! -e "$G8FF_DEV" ] && return 2; binding_error; return 1; }
+        if ! kernel_write /sys/bus/hid/drivers/sony_g8ff/bind "$G8FF_ID"; then
+            if [ ! -e "$G8FF_DEV" ]; then state waiting; return 2; fi
+            # The failed probe can leave the target unbound; explicitly restore stock.
+            if [ -z "$(driver_of "$G8FF_DEV")" ]; then
+                kernel_write /sys/bus/hid/drivers/sony/bind "$G8FF_ID" || { state error_restore_failed; printf '%s\n' "$G8FF_BOOT" > "$G8FF_DIR/run/failure.boot"; return 1; }
+                printf '%s' "$G8FF_OLD_POLL" > "$G8FF_DEV/bt_poll_interval" || { state error_restore_failed; return 1; }
+            fi
+            binding_error; return 1
         fi
-        rm -f "$G8FF_LOCK/pid" "$G8FF_LOCK/boot_id"
-        rmdir "$G8FF_LOCK" 2>/dev/null || true
+        printf '%s' "$G8FF_OLD_POLL" > "$G8FF_DEV/bt_poll_interval" || { binding_error; return 1; }
+    fi
+    find_ff_event || { binding_error; return 1; }
+    state ready
+    return 0
+}
+explain_state() {
+    case "${G8FF_STATUS:-$(cat "$G8FF_DIR/run/state" 2>/dev/null)}" in
+        ready) msg '已啟用，手把震動介面已就緒。' 'Enabled; the controller rumble interface is ready.';;
+        waiting|pending) msg '請連接已設定的手把，再按「動作」。' 'Connect the saved controller, then press Action.';;
+        other_controller) msg '目前連到另一支手把。請連接原本已設定的手把；設定未變更。' 'A different controller is connected. Connect the saved controller; settings were not changed.';;
+        initializing) msg '手把尚未準備好。請將手把關機重開、重新連線，再按「動作」。' 'The controller is not ready. Power it off/on, reconnect, then press Action.';;
+        error_restored) msg '接管失敗，已恢復原廠驅動。請重新連線後再試。' 'Activation failed; the stock driver was restored. Reconnect and retry.';;
+        error_restore_failed) msg '接管失敗，無法確認已恢復。請停用模組並重新連接手把，必要時重新開機。' 'Activation failed; recovery could not be confirmed. Disable the module and reconnect the controller; reboot if needed.';;
+        stopped) msg '服務已停止。' 'Service stopped.';;
+        *) msg '尚未啟用，請確認手把與版本。詳細原因已記錄在模組診斷紀錄。' 'Not enabled. Check controller and version; details are in the module diagnostic log.';;
+    esac
+}
+start_worker() {
+    # Do not pass operation/action locks to the detached worker.
+    setsid sh "$G8FF_DIR/bin/g8ffctl" watch </dev/null >/dev/null 2>&1 7>&- 8>&- 9>&- &
+}
+action() {
+    exclusive_action || { msg '另一個操作正在進行，請稍候再按。' 'Another action is running. Please try again shortly.'; return 1; }
+    guard || return 1
+    operation_lock || { msg '正在處理手把連線，請稍候再按。' 'Processing the controller connection. Please try again shortly.'; return 1; }
+    if ! read_config "$G8FF_DIR/config.sh"; then
+        msg '設定手把：請只連一支支援的 DS4 手把。' 'Controller setup: connect only one supported DS4 controller.'
+        if ! wait_for_target; then controller_help; log "$G8FF_ERROR"; return 1; fi
+        active && ! pending_reboot || return 1
+        write_config "$G8FF_DIR/config.sh" && read_config "$G8FF_DIR/config.sh" || return 1
+        msg '已記住手把，不需要再重新開機。' 'Controller saved. No additional reboot is needed.'
+    fi
+    rm -f "$G8FF_DIR/run/stop.boot" "$G8FF_DIR/run/failure.boot"
+    G8FF_WAIT=0
+    while :; do
+        active && ! pending_reboot && compatible || return 1
+        if ensure_binding; then break; else G8FF_RESULT=$?; fi
+        [ "$G8FF_RESULT" -eq 2 ] || { explain_state; return 1; }
+        [ "$(cat "$G8FF_DIR/run/state")" = initializing ] || { explain_state; return 1; }
+        [ "$G8FF_WAIT" -lt 20 ] || { explain_state; return 1; }
+        sleep 1; G8FF_WAIT=$((G8FF_WAIT + 1))
+        if [ $((G8FF_WAIT % 5)) -eq 0 ]; then msg "仍在等待手把（$G8FF_WAIT/20 秒）…" "Still waiting for the controller ($G8FF_WAIT/20 s)…"; fi
+    done
+    start_worker
+    explain_state
+    msg '接著測試短震動：左側一下、右側兩下。' 'Testing short rumble: left once, right twice.'
+    # Re-resolve the event immediately before testing; never use an unrelated event.
+    find_target && find_ff_event && active || return 1
+    if "$G8FF_DIR/bin/ff_test" "$G8FF_EVENT" "$G8FF_UNIQ" >> "$G8FF_DIR/run/events.log" 2>&1; then
+        msg '測試指令已送出，請確認手把是否震動。' 'Test commands completed. Please confirm physical rumble.'
+    else
+        msg '震動測試未完成。請確認連線後再按「動作」。' 'Rumble test did not complete. Check the connection, then press Action again.'
+        return 1
     fi
 }
-case "${1:-status}" in
-    once) [ ! -e "$G8FF_DIR/disable" ] && load_driver && bind_once;;
-    watch)
-        [ -e "$G8FF_DIR/disable" ] && exit 0
-        G8FF_BOOT_ID=$(cat /proc/sys/kernel/random/boot_id) || exit 1
-        if [ -d "$G8FF_LOCK" ]; then
-            G8FF_PREVIOUS_BOOT=$(cat "$G8FF_LOCK/boot_id" 2>/dev/null)
-            if [ -n "$G8FF_PREVIOUS_BOOT" ] && [ "$G8FF_PREVIOUS_BOOT" != "$G8FF_BOOT_ID" ]; then
-                rm -f "$G8FF_LOCK/pid" "$G8FF_LOCK/boot_id"
-                rmdir "$G8FF_LOCK" || exit 1
+watch() {
+    guard || return 1
+    read_config "$G8FF_DIR/config.sh" || { state pending; return 0; }
+    exec 8>"$G8FF_DIR/run/worker.lock"
+    flock -n 8 || return 0
+    while :; do
+        if ! active || stopped; then
+            if operation_lock; then restore; return; fi
+        elif failed; then return 1
+        elif operation_lock; then
+            if ! compatible; then restore; state incompatible; return 1; fi
+            if ensure_binding; then :; else
+                G8FF_RESULT=$?
+                if [ "$G8FF_RESULT" -ne 2 ]; then
+                    printf '%s\n' "$G8FF_BOOT" > "$G8FF_DIR/run/failure.boot"
+                    log "Worker paused: $(cat "$G8FF_DIR/run/state")"
+                    return 1
+                fi
             fi
+            unlock
         fi
-        mkdir "$G8FF_LOCK" 2>/dev/null || { log 'Worker lock exists; refusing duplicate'; exit 1; }
-        echo $$ > "$G8FF_LOCK/pid"
-        printf '%s' "$G8FF_BOOT_ID" > "$G8FF_LOCK/boot_id"
-        trap 'rm -f "$G8FF_LOCK/pid" "$G8FF_LOCK/boot_id"; rmdir "$G8FF_LOCK" 2>/dev/null' EXIT
-        trap 'exit 0' INT TERM HUP
-        load_driver || exit 1
-        while [ ! -e "$G8FF_DIR/disable" ]; do
-            bind_once || { log 'Worker stopped after binding error'; exit 1; }
-            sleep 1
-        done
-        restore
-        ;;
-    stop) stop_worker && restore;;
+        sleep 1
+    done
+}
+case "${1:-status}" in
+    action) action;;
+    watch) watch;;
+    once) guard && read_config "$G8FF_DIR/config.sh" && operation_lock && ensure_binding;;
+    stop)
+        exclusive_action || exit 1
+        printf '%s\n' "$G8FF_BOOT" > "$G8FF_DIR/run/stop.boot"
+        G8FF_WAIT=0
+        until operation_lock; do G8FF_WAIT=$((G8FF_WAIT + 1)); [ "$G8FF_WAIT" -le 20 ] || exit 1; sleep 1; done
+        restore;;
     status)
-        compatible && echo 'Compatibility: passed' || echo 'Compatibility: failed'
-        [ -d /sys/module/sony_g8ff ] && echo 'Driver: loaded' || echo 'Driver: absent'
-        for G8FF_DEV in /sys/bus/hid/devices/*; do
-            is_target "$G8FF_DEV" && printf '%s %s\n' "${G8FF_DEV##*/}" "$(driver_of "$G8FF_DEV")"
-        done
-        ;;
-    *) echo 'Usage: g8ffctl once|watch|stop|status' >&2; exit 2;;
+        guard || exit 1
+        if read_config "$G8FF_DIR/config.sh"; then
+            if failed; then G8FF_STATUS=$(cat "$G8FF_DIR/run/state"); elif find_target && find_ff_event; then G8FF_STATUS=ready; elif [ "$G8FF_OTHER" -eq 1 ]; then G8FF_STATUS=other_controller; else G8FF_STATUS=waiting; fi
+            explain_state
+        else msg '安裝完成，手把尚未設定。連上手把後按「動作」即可。' 'Installed; controller setup is pending. Connect the controller and press Action.'; fi;;
+    *) echo 'Usage: g8ffctl action|status|once|watch|stop' >&2; exit 2;;
 esac

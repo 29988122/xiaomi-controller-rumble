@@ -1,0 +1,29 @@
+name: Build bounded FF helper
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tools/ff_test.c'
+      - 'tools/build-ff-test.sh'
+      - '.github/workflows/build-helper.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu qemu-user
+      - run: sh tools/build-ff-test.sh /tmp/ff_test
+      - name: Reject unverifiable input without sending an effect
+        run: |
+          set +e
+          qemu-aarch64 /tmp/ff_test /dev/null 02:00:00:00:00:01 > /tmp/rejected.txt
+          result=$?
+          set -e
+          test "$result" = 1
+          grep -q 'Cannot verify controller identity; no rumble sent.' /tmp/rejected.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ff-test-arm64
+          path: /tmp/ff_test

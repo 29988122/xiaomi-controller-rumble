@@ -55,9 +55,12 @@ wait_for_target() {
         [ "$G8FF_ATTEMPT" -lt 20 ] || return 1
         if [ "$G8FF_ATTEMPT" -eq 0 ]; then
             G8FF_PINNED_UNIQ=$G8FF_SELECTED_UNIQ
-            ui_print 'One DS4 controller detected; waiting up to 20 seconds for Sony driver initialization...'
+            msg '已找到手把，最多等待 20 秒完成初始化…' 'Controller found; waiting up to 20 seconds for initialization…'
         fi
         G8FF_ATTEMPT=$((G8FF_ATTEMPT + 1))
         sleep 1
+        if [ $((G8FF_ATTEMPT % 5)) -eq 0 ]; then
+            msg "仍在等待手把（$G8FF_ATTEMPT/20 秒）…" "Still waiting for the controller ($G8FF_ATTEMPT/20 s)…"
+        fi
     done
 }

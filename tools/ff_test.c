@@ -93,9 +93,21 @@ int main(long argc, char **argv)
 {
     long fd;
     int result;
-    if (argc != 2) { say("Usage: ff_test /dev/input/eventN\n"); return 2; }
+    char uniq[64];
+    unsigned int i;
+    if (argc != 3) { say("Usage: ff_test /dev/input/eventN expected_controller_uniq\n"); return 2; }
     fd = call(__NR_openat, -100, (long)argv[1], 2 | 02000000, 0);
     if (fd < 0) { say("open error: "); number(fd); return 1; }
+    /* An event number can be recycled after hot-unplug. Check the opened device,
+     * not merely a sysfs path observed before open(). Keep this fd throughout. */
+    clear(uniq, sizeof(uniq));
+    result = call(__NR_ioctl, fd, EVIOCGUNIQ(sizeof(uniq) - 1), (long)uniq, 0);
+    if (result <= 0) { say("Cannot verify controller identity; no rumble sent.\n"); call(__NR_close, fd, 0, 0, 0); return 1; }
+    for (i = 0; i < sizeof(uniq) - 1 && uniq[i] && argv[2][i] && uniq[i] == argv[2][i]; ++i) {}
+    if (i != 17 || uniq[i] || argv[2][i]) {
+        say("Controller identity mismatch; no rumble sent.\n");
+        call(__NR_close, fd, 0, 0, 0); return 1;
+    }
     say("FF_RUMBLE: left once, right twice, 400 ms each.\n");
     wait_ms(1000);
     result = pulse(fd, 80 * 256, 0);
