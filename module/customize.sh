@@ -32,12 +32,14 @@ else
 fi
 # Record the installing boot; Action must not execute staged/new files early.
 cat /proc/sys/kernel/random/boot_id > "$MODPATH/install.boot" || abort 'Cannot record installation boot.'
-[ ! -e "$G8FF_OLD/disable" ] || touch "$MODPATH/disable"
-set_perm_recursive "$MODPATH" 0 0 0700 0600
-set_perm "$MODPATH/bin/g8ffctl" 0 0 0700
-set_perm "$MODPATH/bin/ff_test" 0 0 0700
-set_perm "$MODPATH/action.sh" 0 0 0700
-touch "$MODPATH/skip_mount"
+if [ -e "$G8FF_OLD/disable" ]; then
+    touch "$MODPATH/disable" || abort 'Cannot preserve disabled state.'
+fi
+set_perm_recursive "$MODPATH" 0 0 0700 0600 || abort "$(msg '無法完成檔案權限設定，未完成安裝。' 'Cannot finish file permissions; installation incomplete.')"
+set_perm "$MODPATH/bin/g8ffctl" 0 0 0700 || abort "$(msg '無法完成檔案權限設定，未完成安裝。' 'Cannot finish file permissions; installation incomplete.')"
+set_perm "$MODPATH/bin/ff_test" 0 0 0700 || abort "$(msg '無法完成檔案權限設定，未完成安裝。' 'Cannot finish file permissions; installation incomplete.')"
+set_perm "$MODPATH/action.sh" 0 0 0700 || abort "$(msg '無法完成檔案權限設定，未完成安裝。' 'Cannot finish file permissions; installation incomplete.')"
+touch "$MODPATH/skip_mount" || abort "$(msg '無法完成檔案權限設定，未完成安裝。' 'Cannot finish file permissions; installation incomplete.')"
 ui_print "$(msg '3/3 安裝完成，請重新開機一次。' '3/3 Installed. Reboot once.')"
 if [ -e "$MODPATH/disable" ]; then
     ui_print "$(msg '已保留停用狀態。重開機後開啟模組開關，再按「動作」即可啟動。' 'Disabled state retained. After reboot, enable the module and press Action to start.')"
