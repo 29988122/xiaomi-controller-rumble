@@ -2,6 +2,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import re
 from pathlib import Path
 import signal
 import subprocess
@@ -69,6 +70,17 @@ else:
         # Fake FF device is independent of kernel operation mocks and records the exact target.
         self.shell('ff_fixture','echo "$1" >> "$TEST_TMP/rumble-targets"; '+sys.executable+' -c "import os,time;time.sleep(float(os.environ.get(\'TEST_FF_SLEEP\',\'0\')))"; test -f "$1"')
         if os.environ.get('TEST_BUSYBOX'):
+            # Standalone ash resolves applets before PATH. Rename only mocked OS
+            # boundary commands in fixture copies; keep real BusyBox utilities/flock.
+            names=['getprop','uname','sleep','setsid','insmod','rmmod']
+            for p in self.mod.rglob('*'):
+                if p.is_file() and (p.suffix=='.sh' or p.name=='g8ffctl'):
+                    text=p.read_text()
+                    for name in names:text=re.sub(r'\b'+name+r'\b',name+'_mock',text)
+                    p.write_text(text)
+            for name in names:
+                target=self.cmd/(name+'_mock');target.write_bytes((self.cmd/name).read_bytes());target.chmod(0o700)
+            self.env['ASH_STANDALONE']='1'
             self.shell('flock','exec "$TEST_BUSYBOX" flock "$@"')
             self.shell('sh','exec "$TEST_BUSYBOX" sh "$@"')
         self.runner=self.tmp/'installer.sh'
